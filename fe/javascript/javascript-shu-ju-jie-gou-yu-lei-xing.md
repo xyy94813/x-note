@@ -1,6 +1,6 @@
 # JavaScript 数据结构与类型
 
-JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2018-03-07** **
+JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2018-03-07
 
 * boolean
 * null
