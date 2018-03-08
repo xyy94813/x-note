@@ -1,1 +1,4 @@
-This file serves as an introduction to your Knowledge Base, it is displayed on the homepage of your website. Use it to provide more context to your visitors.
+# X-Note
+
+X-Note 用于记录个人学习资料与笔记，包含前端，后端，算法，系统与工具，IDE等内容。
+
