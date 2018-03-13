@@ -79,16 +79,34 @@ const f3 = new obj.func(1);
 console.log(f1.args, f1.a); // [1], '123'
 console.log(f2.args, f2.a); // [], '123'
 console.log(f3.args, f3.a, obj.args); // [], '123', undefined
-
 ```
-
-
 
 ## 方法链
 
 > 当方法的返回值是一个对象，这个对象还可以在调用它的方法。这种方法调用序列通常称为**“链”**或者**“级联”**。这个序列中每一次调用的结果都是另一个表达式的组成部分
 
+```js
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+    .map(item => item * 3)
+    .filter((item) => item > 10); // 常见的方法的链式调用
+```
 
+_方法的链式调用和构造函数的链式调用不等价_
+
+
+
+## 补充说明
+
+通过`bind`函数绑定上下文后的函数，无法再次通过`bind` 函数绑定上下文
+
+```js
+function func() {
+ console.log(this)
+}
+
+const newFunc = func.bind([]).bind({});
+newFunc(); // []
+```
 
 
 
