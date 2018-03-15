@@ -10,6 +10,7 @@
     * [JavaScript 函数](fe/javascript/javascript-han-shu.md)
     * [JavaScript delete 运算符](fe/javascript/javascript-delete-yun-suan-fu.md)
     * [JavaScript 内存管理与垃圾回收](fe/javascript/javascript-nei-cun-guan-li-yu-la-ji-hui-shou.md)
+    * [JavaScript 严格模式与混乱模式](fe/javascript/javascript-yan-ge-mo-shi-yu-hun-luan-mo-shi.md)
   * [ECMAScript 6/7/8](fe/ecmascript-678.md)
     * [ECMAScript 6 变量及常量的声明](fe/ecmascript-678/ecmascript-6-bian-liang-ji-chang-liang-de-sheng-ming.md)
 
