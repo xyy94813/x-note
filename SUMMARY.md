@@ -12,6 +12,7 @@
     * [JavaScript 内存管理与垃圾回收](fe/javascript/javascript-nei-cun-guan-li-yu-la-ji-hui-shou.md)
     * [JavaScript 严格模式与混乱模式](fe/javascript/javascript-yan-ge-mo-shi-yu-hun-luan-mo-shi.md)
     * [JavaScript 数字精度丢失](fe/javascript/javascript-shu-zi-jing-du-diu-shi.md)
+    * [利用原型链实现继承](fe/javascript/li-yong-yuan-xing-lian-shi-xian-ji-cheng.md)
   * [ECMAScript 6/7/8](fe/ecmascript-678.md)
     * [ECMAScript 6 变量及常量的声明](fe/ecmascript-678/ecmascript-6-bian-liang-ji-chang-liang-de-sheng-ming.md)
 
