@@ -1,6 +1,6 @@
-# EB 客户端存储
+# WEB 客户端存储
 
-web客户端存储有以下几种形式
+web 客户端存储有以下几种形式
 
 * Cookie
 * Web storage
@@ -8,8 +8,7 @@ web客户端存储有以下几种形式
   * local storage
 * IE User Data
 * 应用程序缓存
-* Web 数据库
-* 文件系统 API
+* 浏览器端数据库
 
 ## Cookie
 
@@ -36,7 +35,6 @@ cookie 的默认有效期很短，只能持续在 Web 浏览器的会话期间�
 ```js
 // 使用 '; ' 分隔
 document.cookie = `key=${val}; max-age=${second}; path=${path}; domain=${domain}; secure`;
-
 ```
 
 读取 cookie 中的数据：
@@ -52,7 +50,6 @@ let _cookies = (function (){
         });
     return obj;
 })();
-
 ```
 
 ## WebStorage
@@ -141,7 +138,6 @@ document.body.appendChild(memory);
 <html manifest="example.appcache">
     ...
 </html>
-
 ```
 
 manifest 特性与**缓存清单（cache manifest）**文件关联，这个文件包含了需要缓存的资源列表。
@@ -167,6 +163,28 @@ manifest 特性与**缓存清单（cache manifest）**文件关联，这个文�
 1. **CACHE（缓存资源）**
 2. **NETWORK（非缓存资源）**
 3. **FALLBACK（后备页面，当资源无法访问时，使用该页面）**
+
+
+
+## 浏览器端数据库
+
+使用 sessionStorage 和 localStorage 应对小规模的数据绰绰有余，但是面对需要存储大规模结构化数据的场景时，还是显得不够灵活和强大。HTML5 引入了，**Web SQL Database** 的概念，基于浏览器嵌入的 **Sqlite** 实现。该规范曾经在 W3C 的推荐规范上，但是目前陷入了僵局之中，已经停止。W3C 目前的推荐的客户端大规模数据解构存储的方案是 **IndexedDB。**
+
+### Web SQL Database
+
+> 该规范的僵局：目前的所有实现都基于同一个 SQL 后端 —— SQLite，但是需要更多的独立实现来规范化
+
+Web SQL Database 基于浏览器内嵌的 sqlite 实现，提供了一组 API 供 Web App 创建、存储、查询数据库。虽然该规范已经停止，但是目前大多数主流浏览器都已经支持 Web SQL Database。
+
+
+
+### IndexedDB
+
+**IndexedDB** 是一个用于在浏览器中储存较大数据结构的 Web API，并提供索引功能以实现高性能查找。 IndexedDB 是一个事务型的数据库系统，类似于关系型数据库系统（RDBMS），不过, 它是使用 JavaScript 对象而非列数固定的表格来储存数据的。
+
+IndexedDB 可以存储所有 [structured clone algorithm](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/The_structured_clone_algorithm) 支持的数据类型，并且是永久有效的，online 和 offline 模式下均能使用。
+
+IndexedDB 访问权限严格基于同源策略。
 
 
 
