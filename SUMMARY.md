@@ -18,6 +18,7 @@
     * [ECMAScript 6 变量的解构赋值](fe/ecmascript-678/ecmascript-6-bian-liang-de-jie-gou-fu-zhi.md)
     * [ECMAScript 6 Promise 对象](fe/ecmascript-678/ecmascript-6-promise-dui-xiang.md)
     * [ECMAScript 6 Symbol](fe/ecmascript-678/ecmascript-6-symbol.md)
+    * [ECMAScript 6 Proxy](fe/ecmascript-678/ecmascript-6-proxy.md)
   * [CSS](fe/css.md)
     * [单列布局](fe/css/dan-lie-bu-ju.md)
   * [WEB 客户端存储](fe/web-ke-hu-duan-cun-chu.md)
