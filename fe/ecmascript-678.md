@@ -5,6 +5,7 @@
 * [ECMAScript 6 Promise 对象](/fe/ecmascript-678/ecmascript-6-promise-dui-xiang.md)
 * [ECMAScript 6 Symbol](/ECMAScript 6 Symbol)
 * [ECMAScript 6 Proxy](/fe/ecmascript-678/ecmascript-6-proxy.md)
+* [ECMAScript 6 Reflect](/fe/ecmascript-678/ecmascript-6-reflect.md)
 
 
 
