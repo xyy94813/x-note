@@ -85,13 +85,9 @@ delete proxy._a; // Error: Can not delete property which start with "_"
 在定义代理对象某个属性时的属性描述时触发该操作，如`Object.defineProperty()`和`Object.defineProperties()`。
 
 > * 如果目标对象不可扩展， 将不能添加属性；
->
 > * 不能添加或者修改一个属性为不可配置的，如果它不作为一个目标对象的不可配置的属性存在的话；
->
 > * 如果目标对象存在一个对应的可配置属性，这个属性可能不会是不可配置的；
->
 > * 如果一个属性在目标对象中存在对应的属性，那么`Object.defineProperty(target, prop, descriptor)`将不会抛出异常；
->
 > * 在严格模式下，`false`作为`handler.defineProperty`方法的返回值的话将会抛出 `TypeError`。
 
 ```js
@@ -111,6 +107,151 @@ Object.defineProperty(proxy, 'a', {
 Object.defineProperty(proxy, 'a', { 
   configurable: true, 
 }); // TypeError: Cannot redefine property: a
+```
+
+#### has\(target, property\)
+
+在判断代理对象是否拥有某个属性时触发该操作，如`in`运算符。
+
+> * 如果目标对象的某一属性本身不可被配置，则该属性不能够被代理隐藏
+> * 如果目标对象为不可扩展对象，则该对象的属性不能够被代理隐藏
+
+```js
+const proxy = new Proxy({
+  a: 1,
+  _a: 2,
+}, {
+  has(target, prop) {
+    if (prop.startsWith('_')) {
+      return false;
+    }
+    return prop in target;
+  }
+});
+console.log('a' in proxy); // true
+console.log('_a' in proxy); // false
+
+const obj = { a: 10 };
+Object.preventExtensions(obj);
+const proxy2 = new Proxy(obj, {
+  has(target, prop) {
+    return false;
+  }
+});
+console.log('a' in proxy2); 
+// TypeError: 'has' on proxy: trap returned falsish for property 'a' but the proxy target is not extensible
+```
+
+`has`拦截对`for...in`循环不生效。
+
+```js
+const obj = { x: 1, y: 2 };
+const proxy = new Proxy(obj, {
+  has(target, prop) {
+    console.log(prop);
+    return false;
+  }
+});
+
+for (let b in proxy) {
+  console.log(proxy[b]);
+}
+// 1 
+// 2
+```
+
+#### ownKeys\(target\)
+
+在获取代理对象的所有属性键时触发该操作，如在 `Object.getOwnPropertyNames(obj)`时。
+
+> * 结果必须是一个数组；
+> * 数组的元素类型只能是`String`或`Symbol`；
+> * 结果列表必须包含目标对象的所有不可配置（non-configurable ）、自有（own）属性的key；
+> * 如果目标对象不可扩展，那么结果列表必须包含目标对象的所有自有（own）属性的key，不能有其它值。
+
+```js
+const obj = {};
+Object.defineProperty(obj, 'a', { 
+  configurable: false, 
+  enumerable: true, 
+  value: 10 
+});
+
+const p = new Proxy(obj, {
+  ownKeys(target) {
+    return ['a', Symbol.for('b'), 'c'];
+  }
+});
+console.log(Object.getOwnPropertyNames(p)); // [ 'a', 'c' ]
+
+const p2 = new Proxy(obj, {
+  ownKeys(target) {
+    return ['a', 123, 12.5, true, false, undefined, null, {}, []];
+  }
+});
+console.log(Object.getOwnPropertyNames(p2)); // TypeError: XXX is not a valid property name
+
+const p3 = new Proxy(obj, {
+  ownKeys(target) {
+    return ['b', 'c'];
+  }
+});
+console.log(Object.getOwnPropertyNames(p3)); 
+// TypeError: 'ownKeys' on proxy: trap result did not include 'a'
+
+Object.preventExtensions(obj);
+const p4 = new Proxy(obj, {
+  ownKeys(target) {
+    return ['a', 'b'];
+  }
+});
+console.log(Object.getOwnPropertyNames(p4)); 
+// TypeError: 'ownKeys' on proxy: trap returned extra keys but proxy target is non-extensible
+```
+
+#### getOwnPropertyDescriptor\(target, property\)
+
+在获取代理对象某个属性的属性描述时触发该操作，如：`Object.getOwnPropertyDescriptor(obj, prop)`。
+
+> * 必须返回一个`object`或`undefined`
+> * 如果属性作为目标对象的不可配置的属性存在，则该属性无法报告为不存在
+> * 如果属性作为目标对象的属性存在，并且目标对象不可扩展，则该属性无法报告为不存在
+> * 如果属性不存在作为目标对象的属性，并且目标对象不可扩展，则不能将其报告为存在
+> * 属性不能被报告为不可配置，如果它不作为目标对象的自身属性存在，或者作为目标对象的可配置的属性存在
+> * `Object.getOwnPropertyDescriptor(target)`的结果可以使用`Object.defineProperty`应用于目标对象，也不会抛出异常
+
+```js
+const obj = { a: 20 };
+Object.defineProperty(obj, 'b', { 
+  configurable: false, 
+  enumerable: true, 
+  value: 20 
+});
+
+
+var p = new Proxy(obj, {
+  getOwnPropertyDescriptor(target, prop) {
+    return { configurable: true, enumerable: true, value: 10 };
+  }
+});
+console.log(Object.getOwnPropertyDescriptor(p, 'a').value);
+
+
+var p2 = new Proxy(obj, {
+  getOwnPropertyDescriptor(target, prop) {
+    return [];
+  }
+});
+console.log(Object.getOwnPropertyDescriptor(p2, 'b'));
+// TypeError: 'getOwnPropertyDescriptor' on proxy: trap reported non-configurability for property 'a' which is either non-existant or configurable in the proxy target
+
+var p3 = new Proxy(obj, {
+  getOwnPropertyDescriptor(target, prop) {
+    return undefined;
+  }
+});
+console.log(Object.getOwnPropertyDescriptor(p3, 'b'));
+// TypeError: 'getOwnPropertyDescriptor' on proxy: trap returned undefined for property 'a' which is non-configurable in the proxy target
 ```
 
 #### apply\(target, context, args\)
@@ -194,6 +335,78 @@ Object.getPrototypeOf(proxy) === Array.prototype; // true
 proxy.__proto__ === Array.prototype; // false
 proxy.isPrototypeOf(Array.prototype); // TypeError: proxy.isPrototypeOf is not a function
 console.log(proxy instanceof Array); // true
+```
+
+#### setPrototypeOf\(target, proto\)
+
+在设置代理对象的原型时触发该操作，如：`Object.setPrototypeOf(proxy)`。如果返回`false`会抛出个`TypeError`异常。
+
+> 如果`target`不可扩展，原型参数必须与`Object.getPrototypeOf()`的值相同。
+
+```js
+const proxy = new Proxy(function () {}, {
+    setPrototypeOf(target, proto) {
+        return false;
+    }
+});
+Object.setPrototypeOf(proxy, {}); // TypeError: 'setPrototypeOf' on proxy: trap returned falsish
+
+const target = {};
+Object.preventExtensions(target);
+const proxy2 = new Proxy(target, {
+    setPrototypeOf(target, proto) {
+        return true;
+    }
+});
+Object.setPrototypeOf(proxy2, {}); 
+// TypeError: 'setPrototypeOf' on proxy: trap returned truish for setting a new prototype on the non-extensible proxy target
+```
+
+#### isExtensible\(target\)
+
+在判断一个代理对象是否是可扩展时触发该操作，如：`Object.isExetensible(proxy)`时。
+
+> `Object.isExtensible(proxy)` 必须返回与`Object.isExtensible(target)`相同的值。
+
+```js
+const p = new Proxy({}, {
+  isExtensible(target) {
+    return true;
+  }
+});
+Object.isExtensible(p); // true
+
+const obj = {};
+Object.preventExtensions(obj);
+const p1 = new Proxy(obj, {
+  isExtensible(target) {
+    return true;
+  }
+});
+const p2 = new Proxy(obj, {
+  isExtensible(target) {
+    return false;
+  }
+});
+Object.isExtensible(p1); // TypeError: 'isExtensible' on proxy: trap result does not reflect extensibility of proxy target (which is 'false')
+Object.isExtensible(p2); // false
+```
+
+#### preventExtensions\(target\)
+
+在让一个代理对象不可扩展时触发该操作，比如在执行`Object.preventExtensions(proxy)`时。如果返回`false`会抛出个`TypeError`异常。
+
+> 如果`Object.isExtensible(proxy)`是`false`，`Object.preventExtensions(proxy)`只能返回`true`。
+
+```js
+const p = new Proxy({}, {
+  preventExtensions(target) {
+    Object.preventExtensions(target);
+    return false;
+  }
+});
+
+Object.preventExtensions(p) // TypeError: 'preventExtensions' on proxy: trap returned falsish
 ```
 
 
