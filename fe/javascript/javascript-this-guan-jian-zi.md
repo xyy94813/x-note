@@ -10,7 +10,7 @@
 
 > 调用嵌套函数时 `this` 不会指向调用外层函数的上下文
 
-```javascript
+```js
 function fn(context) {
     const _this = this;
     console.log(this === context);
@@ -32,7 +32,7 @@ fn.call(fn, fn); // 依次输出 true false true true false
 
 > 作为方法调用时 `this` 指向调用对象
 
-```javascript
+```js
 function method(context) {
     console.log(this === context);
 }
@@ -46,7 +46,7 @@ obj.method(obj); // true
 
 > ES6 引入的箭头函数则比较特殊，箭头函数的 this 作用域始终指向声明时的作用域。当一个函数的上下文改变后，其内部的嵌套函数的上下文也会随之改变
 
-```javascript
+```js
 function fn() {
     const _this = this;
     const innerArrowFn = () => {

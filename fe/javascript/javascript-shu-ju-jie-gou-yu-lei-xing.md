@@ -20,7 +20,7 @@ JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2
 
 在使用 `typeof` 判断一个变量的类型时需要注意这个问题
 
-```javascript
+```js
 typeof null === 'object'; // true, 这是一个内部bug
 ```
 
