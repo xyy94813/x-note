@@ -27,5 +27,214 @@ Reflect.set(proxy, 'a', 1);
 Reflect.get(proxy, 'a'); //get property success
 ```
 
+### 相关API
+
+#### Reflect.apply\(target, context, args\)
+
+对一个函数进行调用操作，同时可以传入一个数组作为调用参数.
+
+```js
+Reflect.apply(Array.prototype.slice, [1, 2, 3], [0, 2]); // [1, 2]
+```
+
+#### Reflect.construct\(target, args\[, newTarget\]\)
+
+对构造函数进行[`new`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new)操作.
+
+> newTarget 参考 `new.target`
+
+```js
+const arrNum = Reflect.construct(Array, [], Number);
+
+Array.isArray(arrNum); // true
+Refelect.getPrototypeOf(arrNum) === Number.prototype; // true
+```
+
+#### Reflect.defineProperty\(target, prop, descriptor\)
+
+定义对象属性，与`Object.defineProperty()`类似
+
+```js
+const obj = {};
+const rest = Reflect.defineProperty(obj, 'a', { value: 1 }); // true
+console.log(rest, obj.a); // true 1
+
+Reflect.preventExtensions(obj);
+const rest2 = Reflect.defineProperty(obj, 'b', { value: 1 }); // true
+console.log(rest2, obj.b); // false undefined
+```
+
+#### Reflect.deleteProperty\(target, propKey\)
+
+删除目标对象的属性，`delete`操作符的函数级操作
+
+```js
+const obj = { a: 1 };
+Reflect.defineProperty(obj, 'b', {
+    configurable: false,
+    value: 2 
+});
+const rest1 = Reflect.deleteProperty(obj, 'a');
+const rest2 = Reflect.deleteProperty(obj, 'b');
+
+console.log(rest1, obj.a); // true undefined
+console.log(rest2, obj.b); // false 2
+```
+
+#### Reflect.get\(target, propKey\[, receiver\]\)
+
+获取对象身上某个属性的值
+
+```js
+const obj = {
+    a: 1,
+    [Symbol.for('b')]: 2,
+    get c() {
+        return 3;
+    }
+};
+
+Reflect.get(obj, 'a'); // 1
+Reflect.get(obj, Symbol.for('b')); // 2
+Reflect.get(obj, 'c'); // 3
+
+
+Reflect.get([1, 2], 1); // 2
+
+function fn () { }
+fn.prototype.z = 'parent';
+Reflect.get(new fn(), 'z'); // parent
+```
+
+#### Reflect.getOwnPropertyDescriptor\(target, propKey\)
+
+获取对象属性描述器。
+
+```js
+const obj = { a: 1 };
+Reflect.defineProperty(obj, 'b', {
+    configurable: false,
+    value: 2 
+});
+
+Reflect.getOwnPropertyDescriptor(obj, 'a'); // {value: 1, writable: true, enumerable: true, configurable: true}
+Reflect.getOwnPropertyDescriptor(obj, 'b'); // {value: 2, writable: false, enumerable: false, configurable: false}
+
+```
+
+#### Reflect.getPrototypeOf\(target\)
+
+获取对象原型
+
+```js
+class A {}
+const obj = new A();
+Reflect.getPrototypeOf(obj) === A.prototype;
+
+function fn () { }
+const obj2 = new fn();
+Reflect.getPrototypeOf(obj2) === fn.prototype; // true
+```
+
+#### Reflect.has\(target, propKey\)
+
+检查对象是否存在某个属性
+
+```js
+const obj = {
+    a: 1,
+    [Symbol.for('b')]: 2,
+    get c() {
+        return 3;
+    }
+};
+
+Reflect.has(obj, 'a'); // true
+Reflect.has(obj, Symbol.for('b')); // true
+Reflect.has(obj, 'c'); // true
+Reflect.has(obj, 'd'); // false
+```
+
+#### Reflect.isExtensible\(target\)
+
+检查对象是否可扩展
+
+```js
+const obj = {};
+
+Reflect.isExtensible(obj); // true
+Reflect.preventExtensions(obj);
+Reflect.isExtensible(obj); // false
+```
+
+#### Reflect.ownKeys\(target\)
+
+返回一个包含所有自身属性（不包含继承属性）的数组
+
+```js
+const obj1 = {
+    a: 1,
+    [Symbol.for('b')]: 2,
+    get c() {
+        return 3;
+    }
+};
+Reflect.ownKeys(obj1); // ["a", "c", Symbol(b)]
+
+function fn () {
+    this.x = 1
+}
+fn.prototype.z = 'z';
+const obj2 = new fn();
+Reflect.ownKeys(obj2); // ["x"]
+```
+
+#### Reflect.preventExtensions\(target\)
+
+将对象标记为不再可扩展
+
+```js
+const obj = {};
+obj.a = 1;
+Reflect.preventExtensions(obj); // true
+obj.b = 1;
+
+console.log(obj); // { a: 1 }
+```
+
+#### Reflect.set\(target, propKey, val\[, receiver\]\)
+
+给目标对象分配属性的值
+
+```js
+const obj = {};
+Reflect.set(obj, 'a', 1); // true
+
+Reflect.defineProperty(obj, 'a', { 
+    writeable: false,
+}); // true
+Reflect.set(obj, 'a', 2); // false
+
+Reflect.preventExtensions(obj); // true
+Reflect.set(obj, 'b', 1); // false
+```
+
+#### Reflect.setPrototypeOf\(target, prototype\)
+
+修改对象的原型
+
+```js
+function fn () {}
+const obj = new fn();
+
+Reflect.getPrototypeOf(obj) === fn.prototype; // true
+
+Reflect.setPrototypeOf(obj, Array.prototype); // true
+Reflect.getPrototypeOf(obj) === Array.prototype; // true
+
+Reflect.preventExtensions(obj); // true
+Reflect.setPrototypeOf(obj, Number.prototype); // true
+```
+
 
 
