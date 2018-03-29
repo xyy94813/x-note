@@ -20,6 +20,7 @@
     * [ECMAScript 6 Symbol](fe/ecmascript-678/ecmascript-6-symbol.md)
     * [ECMAScript 6 Proxy](fe/ecmascript-678/ecmascript-6-proxy.md)
     * [ECMAScript 6 Reflect](fe/ecmascript-678/ecmascript-6-reflect.md)
+    * [ECMAScript 6 new.target](fe/ecmascript-678/ecmascript-6-newtarget.md)
   * [CSS](fe/css.md)
     * [单列布局](fe/css/dan-lie-bu-ju.md)
   * [WEB 客户端存储](fe/web-ke-hu-duan-cun-chu.md)
