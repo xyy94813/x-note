@@ -1,4 +1,4 @@
-# 单列布局
+# 页面布局之单列布局
 
 单列布局的 CSS 实现方式
 
@@ -131,7 +131,7 @@
 ```css
 .parent {
     position: relative;
-    height: 200px;
+    height: 200px;
 }
 .child {
     position: absolute;
@@ -152,7 +152,7 @@
 .parent {
     display: flex;
     align-items: center;
-    height: 200px;
+    height: 200px;
 }
 ```
 
@@ -170,8 +170,8 @@
 .parent {
     display: table-cell;
     vertical-align: middle;
-    text-align: center; 
-    height: 200px;
+    text-align: center; 
+    height: 200px;
 }
 .child {
     display: inline-block;
@@ -182,7 +182,6 @@
 <div class="parent">
     <div class="child"></div>
 </div>
-
 ```
 
 使用绝对定位实现
@@ -190,7 +189,7 @@
 ```css
 .parent {
     position: relative;
-    height: 200px;
+    height: 200px;
 }
 .child {
     position: absolute;
@@ -204,7 +203,6 @@
 <div class="parent">
     <div class="child"></div>
 </div>
-
 ```
 
 使用`flex`实现
@@ -214,7 +212,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 200px;
 }
 ```
 
