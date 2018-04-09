@@ -22,6 +22,7 @@
     * [ECMAScript 6 Reflect](fe/ecmascript-678/ecmascript-6-reflect.md)
     * [ECMAScript 6 new.target](fe/ecmascript-678/ecmascript-6-newtarget.md)
     * [ECMAScript 6 Set 和 WeakSet](fe/ecmascript-678/ecmascript-6-set-he-weakset.md)
+    * [ECMAScript 6 Map 和 WeakMap](fe/ecmascript-678/ecmascript-6-map-he-weakmap.md)
     * [ECMAScript 6 Iterator](fe/ecmascript-678/ecmascript-6-iterator.md)
   * [CSS](fe/css.md)
     * [CSS 块格式化上下文\(BFC\)](fe/css/css-kuai-ge-shi-hua-shang-xia-658728-bfc.md)
