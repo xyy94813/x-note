@@ -11,6 +11,7 @@ Node 应用工具
 
 * [whistle](https://github.com/avwo/whistle) —— 能够替代 Charles 的抓包代理工具，带有 web 页面
 * [http-server](https://github.com/indexzero/http-server) —— 快速指定文件夹，并启动一个 web 服务器
+* [conventional-changelog](https://github.com/conventional-changelog) —— 基于一定格式的 git message 生成 change log
 
 应用构建工具
 
