@@ -36,4 +36,5 @@
   * [常用工具](fe/chang-yong-gong-ju.md)
 * [正则表达式](zheng-ze-biao-da-shi.md)
   * [正则表达式基础](zheng-ze-biao-da-shi/zheng-ze-biao-da-shi-ji-chu.md)
+  * [正则表达式的悲观回溯](zheng-ze-biao-da-shi/zheng-ze-biao-da-shi-de-bei-guan-hui-su.md)
 
