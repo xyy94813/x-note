@@ -2,9 +2,7 @@
 
 > ES6 里的`Iterator`并不是一种新的语法或是新的内置对象，而是一种协议（protocl），所有遵循了这个协议的对象都可以称之为“迭代器对象”。
 
-ES6 规定，默认的 Iterator 接口需要部署在数据结构的`Symbol.iterator`属性上，也就是说，对象必须包含`Symbol.iterator`方法。此外，并且该方法返回一个符合 Iterator 协议规定的对象。
-
-该对象包含 1 个`next()`方法，该方法返回一个对象，对象包含以下两个属性：
+ES6 规定，默认的 Iterator 接口需要部署在数据结构的`Symbol.iterator`属性上 —— _iterable protocol （可迭代协议）_，也就是说，对象必须包含`Symbol.iterator`方法。此外，并且该方法返回一个符合 _iterator protocol（迭代器协议）_规定的对象 。该对象包含 1 个`next()`方法，该方法返回一个对象 ，对象包含以下两个属性：
 
 * value —— 值
 * done —— 布尔值，标记是否结束遍历
