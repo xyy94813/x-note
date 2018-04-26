@@ -51,9 +51,7 @@ let [a, b, c = 3, d = 4, e] = [1, null, undefined];
 console.log(a, b, c, d, e); // 1 null 3 4 undefined
 ```
 
-### 
-
-### 解构对象
+## 解构对象
 
 一般用法。
 
@@ -84,10 +82,7 @@ let {
   ] 
 } = obj;
 console.log(x, y); // Hey Girl
-
 ```
-
-## 
 
 ## 解构字符串
 
@@ -101,36 +96,29 @@ console.log(c1, c2, c3); // H e y
 // 使用扩展运算符
 const [...str] = 'Hey';
 console.log(str); // Hey
-
 ```
-
-
 
 ## 解构数值和布尔值
 
 解构赋值时，如果等号右边时数值或布尔值，会先转换成对应的对象类型。
 
 ```js
-let { toString: numToString } = 123;
-numToString === Number.prototype.toString // true
-let { toString: boolToString } = true;
-boolToString === Boolean.prototype.toString // true
-
+let { toString: numToString } = 123;
+numToString === Number.prototype.toString // true
+let { toString: boolToString } = true;
+boolToString === Boolean.prototype.toString // true
 ```
-
-
 
 ## 函数参数的解构赋值
 
 ```js
-function move({x, y} = { x: 0, y: 0 }) {
-  return [x, y];
+function move({x, y} = { x: 0, y: 0 }) {
+  return [x, y];
 }
-move({x: 3, y: 8}); // [3, 8]
-move({x: 3}); // [3, undefined]
-move({}); // [undefined, undefined]
-move(); // [0, 0]
-
+move({x: 3, y: 8}); // [3, 8]
+move({x: 3}); // [3, undefined]
+move({}); // [undefined, undefined]
+move(); // [0, 0]
 ```
 
 
