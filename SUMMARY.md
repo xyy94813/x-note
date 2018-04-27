@@ -25,6 +25,7 @@
     * [ECMAScript 6 Map 和 WeakMap](fe/ecmascript-678/ecmascript-6-map-he-weakmap.md)
     * [ECMAScript 6 Iterator](fe/ecmascript-678/ecmascript-6-iterator.md)
     * [ECMAScript 6 Generator](fe/ecmascript-678/ecmascript-6-generator.md)
+    * [ECMAScript 6 class](fe/ecmascript-678/ecmascript-6-class.md)
   * [CSS](fe/css.md)
     * [CSS 块格式化上下文\(BFC\)](fe/css/css-kuai-ge-shi-hua-shang-xia-658728-bfc.md)
     * [CSS 外边距合并](fe/css/css-wai-bian-ju-he-bing.md)

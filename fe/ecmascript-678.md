@@ -10,6 +10,7 @@
 * [ECMAScript 6 Set 和 WeakSet](/fe/ecmascript-678/ecmascript-6-set-he-weakset.md)
 * [ECMAScript 6 Iterator](/fe/ecmascript-678/ecmascript-6-iterator.md)
 * [ECMAScript 6 Generator](/fe/ecmascript-678/ecmascript-6-generator.md)
+* [ECMAScript 6 class](/fe/ecmascript-678/ecmascript-6-class.md)
 
 
 
