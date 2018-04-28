@@ -12,6 +12,8 @@
 * [ECMAScript 6 Iterator](/fe/ecmascript/ecmascript-6-iterator.md)
 * [ECMAScript 6 Generator](/fe/ecmascript/ecmascript-6-generator.md)
 * [ECMAScript 6 class](/fe/ecmascript/ecmascript-6-class.md)
+* [ECMAScript 7](/fe/ecmascript/ecmascript-7.md)
+* [ECMAScript 8 async 函数](/fe/ecmascript/ecmascript-8-async-han-shu.md)
 
 
 
