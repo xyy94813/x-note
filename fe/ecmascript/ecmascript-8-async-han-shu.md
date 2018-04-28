@@ -166,13 +166,11 @@ console.log('main'); // (C)
 // Resolved: abc
 ```
 
-分析上诉代码：
+分析上述代码：
 
 1. Line\(A\): 同步调用 async 函数，async 函数的 promise 通过 return 变成 resolved 状态
 2. Line\(C\): 继续执行
 3. Line\(B\): 异步通知 Promise 状态变更
-
-
 
 
 
