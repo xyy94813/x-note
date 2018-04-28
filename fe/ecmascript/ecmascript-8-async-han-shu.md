@@ -141,5 +141,38 @@ Promise.all([
 // cannot excute async [fn 2], because counter > 0
 ```
 
+## async  函数的执行过程
+
+async 函数是同步开始，异步结束的
+
+1. async 函数的结果永远是一个 Promise 对象 `p`，这个 Promise 在开始执行异步函数的时候创建
+2. async 函数体被执行。通过`return`或`throw`返回最终的执行结果，又或者通过`await`返回临时结果；这些结果通常都是延迟返回的;
+3. 返回 Promise `p`。
+
+当执行 async 函数体时，`return x`将会使 Promise `p`以`resolved`状态返回 `x`，`throw err`将会使 Promise `p`以`rejected`状态返回 `err`。执行结果的通知是异步发生的。换句话说，`then()`和`catch()`总是在当前代码执行结束之后再执行。
+
+```js
+async function asyncFunc() {
+    console.log('asyncFunc()'); // (A)
+    return 'abc';
+}
+asyncFunc().
+then(x => console.log(`Resolved: ${x}`)); // (B)
+console.log('main'); // (C)
+
+// Output:
+// asyncFunc()
+// main
+// Resolved: abc
+```
+
+分析上诉代码：
+
+1. Line\(A\): 同步调用 async 函数，async 函数的 promise 通过 return 变成 resolved 状态
+2. Line\(C\): 继续执行
+3. Line\(B\): 异步通知 Promise 状态变更
+
+
+
 
 
