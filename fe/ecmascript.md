@@ -15,6 +15,7 @@
 * [ECMAScript 7](/fe/ecmascript/ecmascript-7.md)
 * [ECMAScript 8 async 函数](/fe/ecmascript/ecmascript-8-async-han-shu.md)
 * [ECMAScript 8 内存共享与原子性](/ECMAScript 8 内存共享与原子性)
+* [ECMAScript 8 Others](/fe/ecmascript/ecmascript-8-others.md)
 
 
 

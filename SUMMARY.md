@@ -29,6 +29,7 @@
     * [ECMAScript 7](fe/ecmascript/ecmascript-7.md)
     * [ECMAScript 8 async 函数](fe/ecmascript/ecmascript-8-async-han-shu.md)
     * [ECMAScript 8 内存共享与原子性](fe/ecmascript/ecmascript-8-nei-cun-gong-xiang-yu-yuan-zi-xing.md)
+    * [ECMAScript 8 Others](fe/ecmascript/ecmascript-8-others.md)
   * [CSS](fe/css.md)
     * [CSS 块格式化上下文\(BFC\)](fe/css/css-kuai-ge-shi-hua-shang-xia-658728-bfc.md)
     * [CSS 外边距合并](fe/css/css-wai-bian-ju-he-bing.md)
