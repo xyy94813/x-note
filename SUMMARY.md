@@ -45,4 +45,6 @@
   * [正则表达式的悲观回溯](zheng-ze-biao-da-shi/zheng-ze-biao-da-shi-de-bei-guan-hui-su.md)
 * [Git](git.md)
   * [Git 工作流](git/git-gong-zuo-liu.md)
+* [基础算法](ji-chu-suan-fa.md)
+  * [冒泡排序](mao-pao-pai-xu.md)
 
