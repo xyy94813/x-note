@@ -47,4 +47,5 @@
   * [Git 工作流](git/git-gong-zuo-liu.md)
 * [基础算法](ji-chu-suan-fa.md)
   * [冒泡排序](ji-chu-suan-fa/mao-pao-pai-xu.md)
+  * [插入排序](ji-chu-suan-fa/cha-ru-pai-xu.md)
 
