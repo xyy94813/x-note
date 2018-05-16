@@ -48,12 +48,12 @@ function quickSort(arr, left, right) {
         while (arr[i] <= pivot && i < j) {
             i++;
         }
-        if (i < j) {
+        if (i < j && arr[i] !== arr[j]) {
             swap(arr, i, j)
         }
     }
 
-    if (left !== i) {
+    if (left !== i && arr[left] !== arr[i]) {
         swap(arr, left, i);  
     }
 
