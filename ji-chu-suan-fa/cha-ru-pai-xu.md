@@ -28,11 +28,10 @@ function insertSort(arr) {
         let tmp = arr[i]; // 减少索引访问
         // 数组的 0~i-1 部分，即已排序序列 
         for (let j = i - 1; j >= 0; --j) {
-            if (tmp >= arr[j]) {
-                break;
-            }
-            arr[j + 1] = arr[j];
-            arr[j] = tmp;
+            if (tmp < arr[j]) {
+                arr[j + 1] = arr[j];
+                arr[j] = tmp;
+            }            
         }
     }
     return arr;    
