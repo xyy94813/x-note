@@ -63,23 +63,40 @@ function mergeSort(arr) {
   if(arr.length < 2){
     return;
   }
+  
   for (let step = 1; step < len; step *= 2) {
-    let left = 0;
-    let right = step;
-    while(right + step <= len){
-      mergeArrays(arr, left, left + step, right, right + step);
-      left = right + step;
-      right = left + step;
-    }
-    if(right < len){
-      mergeArrays(arr, left, left + step, right, len);
-    }
-    step *= 2;
+    for (let i = 0; i < len; i = i + 2 * step) {
+      mergeArrays(
+        arr, 
+        i, 
+        Math.min(i + step, len), 
+        Math.min(i + 2 * step, len)
+      );
+    };
   }
-}
-//对左右序列进行排序
-function mergeArrays(arr, startLeft, stopLeft, startRight, stopRight) {
-  // ...
+  
+  //对左右序列进行排序
+  function mergeArrays(arr, left, right, end) {
+    let n = left,
+        m = right;
+    const currentSort = [];
+    
+    for (let j = left; j < end; j++) {
+      if ( n < right && ( m >= end || arr[n] < arr[m] )) {
+        currentSort.push(arr[n]);
+        n++;
+      } else {
+        currentSort.push(arr[m]);
+        m++;
+      }
+    }
+    //     
+    currentSort.forEach(function(item, index) { 
+      arr[left + index] = item; 
+    });
+  }
+  
+  return arr;
 }
 ```
 
