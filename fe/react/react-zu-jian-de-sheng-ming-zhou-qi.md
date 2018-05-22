@@ -34,6 +34,8 @@
 
 1. `componentWillUnmount()`
 
+![](https://pic4.zhimg.com/80/v2-610ad32e1ed334b3b12026a845e83399_hd.jpg)
+
 ## API 详情
 
 #### static getDefaultProps
