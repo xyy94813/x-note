@@ -4,6 +4,8 @@
 
 ## 三个阶段与相关 API
 
+![](https://pic4.zhimg.com/80/v2-610ad32e1ed334b3b12026a845e83399_hd.jpg)
+
 ### 挂载
 
 挂载阶段相关的生命周期 API：
@@ -34,7 +36,7 @@
 
 1. `componentWillUnmount()`
 
-![](https://pic4.zhimg.com/80/v2-610ad32e1ed334b3b12026a845e83399_hd.jpg)
+
 
 ## API 详情
 
