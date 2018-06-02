@@ -101,7 +101,7 @@ class Root extends Component {
             color: 'red',
         }
     }
-    
+
     render() {
         return (
             <MComponent />
