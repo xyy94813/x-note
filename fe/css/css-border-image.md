@@ -63,9 +63,9 @@ border-image-source: repeating-linear-gradient(45deg, transparent, #4d9f0c 20px)
 
 ![](https://developer.mozilla.org/files/3814/border-image-slice.png)
 
-* 区域 1-4 为角区域（corner region）。 每一个都用一次来形成最终边界图像的角点。
+* 区域 1-4 为角区域（corner region）。 每一个都用一次来形成最终边界图像的角点。
 * 区域 5-8 边区域（edge region）。在最终的边框图像中重复，缩放或修改它们以匹配元素的尺寸。
-* 区域 9 为中心区域（ middle region）。它在默认情况下会被丢弃，但如果设置了关键字`fill`，则会将其用作背景图像。
+* 区域 9 为中心区域（ middle region）。它在默认情况下会被丢弃，但如果设置了关键字`fill`，则会将其用作背景图像。
 
 ```css
 /* 所有的边 */
@@ -91,7 +91,20 @@ border-image-slice: unset;
 
 ### border-image-width
 
-**`border-image-width`**定义图像边框宽度。假如border-image-width大于已指定的`border-width`，那么它将向内部（padding/content）扩展。
+`border-image-width`定义图像边框宽度。假如border-image-width大于已指定的`border-width`，那么它将向内部（padding/content）扩展。
+
+```css
+border-image-width: all                        /* One-value syntax */       
+/* E.g. border-image-width: 3; */
+border-image-width: vertical horizontal        /* Two-value syntax */       
+/* E.g. border-image-width: 2em 3em; */
+border-image-width: top horizontal bottom      /* Three-value syntax */     
+/* E.g. border-image-width: 5% 15% 10%; */
+border-image-width: top right bottom left      /* Four-value syntax */      
+/* E.g. border-image-width: 5% 2em 10% auto; */
+
+border-image-width: inherit
+```
 
 ### border-image-outset
 
@@ -118,8 +131,10 @@ border-image-repeat: inherit;
 `border-image-repeat`定义图片如何填充边框。或为单个值，设置所有的边框；或为两个值，分别设置水平与垂直的边框。
 
 ```css
-border-image-repeat: type                      /* One-value syntax */       E.g. border-image-value: stretch;
-border-image-repeat: horizontal vertical       /* Two-value syntax */       E.g. border-image-width: round space;
+border-image-repeat: type                      /* One-value syntax */       
+/* E.g. border-image-value: stretch; */
+border-image-repeat: horizontal vertical       /* Two-value syntax */       
+/* E.g. border-image-width: round space; */
 
 border-image-repeat: inherit
 ```
