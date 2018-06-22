@@ -7,6 +7,7 @@
 * [归并排序](/ji-chu-suan-fa/gui-bing-pai-xu.md)
 * [希尔排序](/ji-chu-suan-fa/xi-er-pai-xu.md)
 * [堆排序](/ji-chu-suan-fa/dui-pai-xu.md)
+* [桶排序](/ji-chu-suan-fa/tong-pai-xu.md)
 * [计数排序](/ji-chu-suan-fa/ji-shu-pai-xu.md)
 
 

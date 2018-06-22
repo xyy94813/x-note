@@ -35,14 +35,14 @@ function countingSort(arr) {
         c[index] = counter ? counter + 1 : 1;
     })
     
-    const rest = [];
+    arr.splice(0); // 清空数组
     c.forEach((item, index) => {
         while(item) {
-            rest.push(index + minVal);
+            arr.push(index + minVal);
             item --;
         }
     });
-    return rest;
+    return arr;
 }
 ```
 
