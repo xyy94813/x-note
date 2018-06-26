@@ -60,4 +60,5 @@
   * [堆排序](ji-chu-suan-fa/dui-pai-xu.md)
   * [桶排序](ji-chu-suan-fa/tong-pai-xu.md)
   * [计数排序](ji-chu-suan-fa/ji-shu-pai-xu.md)
+  * [基数排序](ji-chu-suan-fa/radix-sort.md)
 
