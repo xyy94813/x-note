@@ -34,13 +34,15 @@ console.log(bar(7));
 
 对象被分配在一个堆中，即用以表示一个大部分非结构化的内存区域。
 
-### 队列
+### 消息队列
 
-一个 JavaScript 运行时包含了一个待处理的**消息队列（message queue）**。每一个消息都有一个为了处理这个消息相关联的函数。
+一个 JavaScript 运行时包含了一个**消息队列（message queue）**。每一个消息都有一个为了处理这个消息相关联的函数。
 
-在事件循环时，runtime （运行时）总是从最先进入队列的一个消息开始处理队列中的消息。正因如此，这个消息就会被移出队列，并将其作为输入参数调用与之关联的函数。
+当 JavaScript 创建一个异步任务时，不会立刻放入调用栈中，而是先放入消息队列中，等待调用栈的函数清空后再从消息队列中将等待执行的函数加入调用栈中执行。
 
-函数的处理会一直进行，直到执行栈再次为空；然后事件循环（event loop）将会处理队列中的下一个消息（如果还有的话）。
+不同来源的异步任务加入到不同的消息队列中。
+
+> 后面提到 task queue 和 job queue 都被视为一种 message queue。
 
 ## 事件循环
 
@@ -52,20 +54,48 @@ while (queue.waitForMessage()) {
 }
 ```
 
-> 在零延迟调用 setTimeout 时，其并不是过了给定的时间间隔后就马上执行回调函数。其等待的时间基于队列里正在等待的消息数量。
+HTML5 中的 Event Loop 规范：
 
-HTML5 规范中的 Event Loop：
 1. 对于每个浏览器环境，至多有一个 Event Loop
-2. 一个 Event Loop 可以有一个或多个任务队列（task queue）
-3. 一个任务队列是一列有序的任务（task），
+2. 一个 Event Loop 可以有一个或多个**任务队列（task queue）**
+3. 一个任务队列是一列有序的任务（task）
 
-> micro-task 在 ES2015 规范中称为 Job。 其次，macro-task 代指 task。
+在事件循环时，runtime （运行时）总是从最先进入队列的一个消息开始处理队列中的消息。正因如此，这个消息就会被移出队列，并将其作为输入参数调用与之关联的函数。函数的处理会一直进行，直到执行栈再次为空；然后 Event Loop 将会处理队列中的下一个消息（如果还有的话）。
 
-### 宏任务队列（macro-tasks）
-// TODO
+> 此外，在零延迟调用 setTimeout 等函数添加异步任务时，并不是过了给定的时间间隔后就马上执行回调函数。其等待的时间基于队列里正在等待的消息数量。
 
-### 微任务队列（micro-tasks）
-// TODO
+## 宏任务（macro-task）和微任务（micro-task）
+
+目前大多数现代浏览器环境，一般存在两类处理异步任务的消息队列：
+
+* 宏任务队列（macro-task queue）
+* 微任务队列（micro-task queue）
+
+> 在 ES2015 规范中称 micro-task 为 Job，而 macro-task 代指 task。
+> micro-task queue 等同于 job queue， macro-task queue 等同于 task queue。
+
+micro-task queue 的优先级要高于 macro-task queue，Event Loop 会优先处理 micro-task queue 中的等待执行的异步任务，再去处理 macro-task queue 中的异步任务。
+
+_上述内容需要再次确认_
+
+macro-task 来源：
+* I/O
+* UI 渲染
+* `setTimeout`
+* `setInterval`
+* `setImmediate`
+
+> setTimeout 等本质上是 JS 线程调用了其它线程，其它线程在条件达成时把任务塞入队列。
+
+micro-task 来源：
+* `Promise.prototype.then`
+* `Object.observe`
+* `MutationObserver`
+
+Jobs 和 Job Queues ？
+
+ScriptJobs ？ => Jobs that validate and evaluate ECMAScript Script and Module source text.
+PromiseJobs ? => Jobs that are responses to the settlement of a Promise
 
 ## 浏览器与 Node 在事件循环上的区别
 // TODO
