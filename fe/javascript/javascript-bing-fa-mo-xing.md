@@ -154,7 +154,7 @@ while(ture) {
 * ScriptJobs
 * PromiseJobs
 
-ScriptJobs that validate and evaluate ECMAScript Script and Module source text.   
+ScriptJobs that validate and evaluate ECMAScript Script and Module source text.  
 PromiseJobs that are responses to the settlement of a Promise.
 
 ### 动画帧回调队列
