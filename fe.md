@@ -1,7 +1,7 @@
 # Front-End
 
 * [JavaScript](/fe/javascript.md)
-* [ECMAScript 6/7/8](/fe/ecmascript-678.md)
+* [ECMAScript](/fe/ecmascript.md)
 * [CSS](/fe/css.md)
 * [React](/fe/react.md)
 * [WEB 客户端存储](/fe/web-ke-hu-duan-cun-chu.md)
