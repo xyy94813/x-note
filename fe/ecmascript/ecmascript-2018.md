@@ -6,14 +6,15 @@ ECMAScript 2018 中依旧只做了少部分的变更，其中包括：
 * 新增 Rest/Spread Properties
 * 新增 Asynchronous iteration
 * 对字符串模版进行修订
-* s (dotAll) flag for regular expressions
-* RegExp named capture groups
-* RegExp Unicode property escapes
-* RegExp lookbehind assertions
+* 正则表达式功能调整
+    * s (dotAll) flag for regular expressions
+    * RegExp named capture groups
+    * RegExp Unicode property escapes
+    * RegExp lookbehind assertions
 
 ## Promise.prototype.finally()
 
-ECMAScript 2018 的重大变更之一，解决了原先许多的痛点。使用的类似于同步代码块中的 `finally {}` 部分。
+ECMAScript 2018 的重大变更之一，解决了原先许多的痛点。类似于同步代码块中的 `finally {}` 部分。
 
 ```
 try{
@@ -233,18 +234,127 @@ tagFunc`\u{4B}`;  // { Cooked: [ 'K' ], Raw: [ '\\u{4B}' ] }
 > 非法转义序列在"cooked"当中仍然会体现出来。它们将以 undefined 元素的形式存在于"cooked"之中：
 
 
-## s (dotAll) flag for regular expressions
+## 正则表达式功能调整
 
-TODO
+ES2018 为该 `RegExp` 对象增加了四个新功能，进一步提高了 JavaScript 的字符串处理能力。
 
-## RegExp named capture groups 
+### s (dotAll) flag for regular expressions
 
-TODO
+**正则表达式中的点（`.`） 存在两个限制。**
 
-## RegExp Unicode property escapes
+不能匹配星芒（非 BMP）字符，例如 emoji
 
-TODO
+> 星芒字符（astral characters）。 non-BMP 字符中的一种
 
-## RegExp lookbehind assertions
+```js
+/^.$/.test('😀') // false
+```
+这个问题可以通过 `/u` 标志 (unicode 模式) 解决
 
-TODO
+```js
+/^.$/u.test('😀') // true
+```
+
+与行终止符不匹配
+
+> 以下字符被 ECMAScript 视为行终止符：
+> U+000A LINE FEED (LF) (\n)
+> U+000D CARRIAGE RETURN (CR) (\r)
+> U+2028 LINE SEPARATOR
+> U+2029 PARAGRAPH SEPARATOR
+
+> 还有一些 newline-ish 字符不被 ECMAScript 视为行终止符：
+> U+000B VERTICAL TAB (\v)
+> U+000C FORM FEED (\f)
+> U+0085 NEXT LINE
+
+```js
+/^.$/.test('\n');  // false
+```
+之前通过以下方式解决
+
+```js
+/^[^]$/.test('\n');  // true
+/^[\s\S]$/.test('\n'); // true
+/^[\d\D]$/.test('\n'); // true
+```
+
+ES2018 采用了以下提议用于解决上诉问题，单行模式中（`.`）能够匹配换行符(`\n`)
+
+```js
+/^.$/s.test('\n');  // false
+```
+
+### RegExp named capture groups 
+ 
+支持在正则表达式中使用`(?<name>...)`语法命名捕获组
+
+before:
+```js
+const re = /(\d{4})-(\d{2})-(\d{2})/;
+const match= re.exec('2019-01-10');
+
+console.log(match[0]);    // → 2019-01-10
+console.log(match[1]);    // → 2019
+console.log(match[2]);    // → 01
+console.log(match[3]);    // → 10
+```
+
+now:
+```js
+const re = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+const match = re.exec('2019-01-10');
+
+console.log(match.groups);          // → {year: "2019", month: "01", day: "10"}
+console.log(match.groups.year);     // → 2019
+console.log(match.groups.month);    // → 01
+console.log(match.groups.day);      // → 10
+```
+
+要将命名的捕获组插入到方法的替换字符串中replace()，您需要使用`$<name>`构造。
+
+```js 
+const re = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+'2019-01-10'.replace(re, '$<year>-02-$<day>') // 2019-02-01
+```
+
+正则表达式中的 `\k <name>` 表示：匹配先前由命名的捕获组名称匹配的字符串。 例如：
+
+```js
+const RE_TWICE = /^(?<word>[a-z]+)!\k<word>$/;
+RE_TWICE.test('abc!abc'); // true
+RE_TWICE.test('abc!ab'); // false
+```
+
+### RegExp Unicode property escapes
+
+ES2018 提供了一种称为 Unicode 属性转义的新类型转义序列，它在正则表达式中提供对完整 Unicode 的支持。
+
+Unicode property escapes look like this:
+
+* Match all characters whose property prop has the value value:
+    `\p{prop=value}`
+* Match all characters that do not have a property prop whose value is value:
+    `\P{prop=value}`
+* Match all characters whose binary property bin_prop is True:
+    `\p{bin_prop}`
+* Match all characters whose binary property bin_prop is False:
+    `\P{bin_prop}`
+
+> 假设您要在字符串中匹配 `Unicode` 字符`㉛`。虽然`㉛`被认为是一个数字，但是你不能将它与 `\d` 速记字符类匹配，因为它只支持 ASCII[0-9] 字符。另一方面，Unicode 属性转义可用于匹配 Unicode中 的任何十进制数
+
+```js
+console.log(/\d/u.test('㉛')); // false
+
+console.log(/\p{Number}/u.test('㉛')); // true
+/^\p{White_Space}+$/u.test('\t \n\r'); // true
+/^\p{Script=Greek}+$/u.test('μετά'); // ture
+```
+
+### RegExp lookbehind assertions
+
+JavaScript 以前只支持超前断言，现在能够支持后向断言`(?<=...)`
+
+```js
+'$foo %foo foo'.replace(/(?<=\$)foo/g, 'bar'); // '$bar %foo foo'
+```
