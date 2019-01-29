@@ -6,6 +6,6 @@
 * [React](/fe/react.md)
 * [WEB 客户端存储](/fe/web-ke-hu-duan-cun-chu.md)
 * [常用工具](/fe/chang-yong-gong-ju.md)
-
+* [重绘与重排](/fe/zhong-hui-yu-zhong-pai.md)
 
 
