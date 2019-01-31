@@ -32,6 +32,7 @@
     * [ECMAScript 8 内存共享与原子性](fe/ecmascript/ecmascript-8-nei-cun-gong-xiang-yu-yuan-zi-xing.md)
     * [ECMAScript 8 Others](fe/ecmascript/ecmascript-8-others.md)
     * [ECMAScript 2018](fe/ecmascript/ecmascript-2018.md)
+    * [ECMAScript 2019](fe/ecmascript/ecmascript-2019.md)
   * [CSS](fe/css.md)
     * [CSS 块格式化上下文\(BFC\)](fe/css/css-kuai-ge-shi-hua-shang-xia-658728-bfc.md)
     * [CSS 外边距合并](fe/css/css-wai-bian-ju-he-bing.md)
