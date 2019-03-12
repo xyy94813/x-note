@@ -75,7 +75,7 @@ function preOrderWithoutRecursion(root) {
 
 ## 中序遍历
 
-中序遍历（in-order）的顺序是 LRD
+中序遍历（in-order）的顺序是 LDR
 
 ![](https://user-gold-cdn.xitu.io/2018/6/20/1641c591b78015a9?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
