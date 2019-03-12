@@ -64,6 +64,7 @@
   * [桶排序](ji-chu-suan-fa/tong-pai-xu.md)
   * [计数排序](ji-chu-suan-fa/ji-shu-pai-xu.md)
   * [基数排序](ji-chu-suan-fa/radix-sort.md)
+  * [二叉树的遍历](ji-chu-suan-fa/er-cha-shu-de-bian-li.md)
 * [HTTP](http.md)
   * [HTTP 基础](http/http-ji-chu.md)
 
