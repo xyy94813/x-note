@@ -156,17 +156,17 @@ function postOrderWithoutRecursion(root) {
   let last = node;
   stack.push(node);
   while (stack.length > 0) {
-    node = stack.pop();
+    node = stack[stack.length - 1];
     if (
       (!node.left && !node.right) ||
       (!node.right && last === node.left) ||
       last === node.right
     ) {
-      // console.log(node.val);
+      console.log(node.val);
       // doing something
       last = node;
+      stack.pop();
     } else {
-      stack.push(node);
       if (node.right) {
         stack.push(node.right);
       }
