@@ -9,6 +9,11 @@
 * [堆排序](/ji-chu-suan-fa/dui-pai-xu.md)
 * [桶排序](/ji-chu-suan-fa/tong-pai-xu.md)
 * [计数排序](/ji-chu-suan-fa/ji-shu-pai-xu.md)
+* [二叉树的遍历](/ji-chu-suan-fa/er-cha-shu-de-bian-li.md)
+
+
+
+
 
 
 
