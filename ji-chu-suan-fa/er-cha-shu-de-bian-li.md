@@ -146,3 +146,34 @@ function postOrder(root) {
 
 ### 后序遍历的非递归方式
 
+```js
+function postOrderWithoutRecursion(root) {
+  if (!root) {
+    return;
+  }
+  const stack = [];
+  let node = root;
+  let last = node;
+  stack.push(node);
+  while (stack.length > 0) {
+    node = stack.pop();
+    if (
+      (!node.left && !node.right) ||
+      (!node.right && last === node.left) ||
+      last === node.right
+    ) {
+      // console.log(node.val);
+      // doing something
+      last = node;
+    } else {
+      stack.push(node);
+      if (node.right) {
+        stack.push(node.right);
+      }
+      if (node.left) {
+        stack.push(node.left);
+      }
+    }
+  }
+}
+```
