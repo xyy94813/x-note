@@ -4,10 +4,10 @@
 
 基数排序还分为了 **LSD（Least significant digital）** 和 **MSD（Most significant diagital）**两种实现方式。其中，LSD 先比较低位的数字，MSD 反之。
 
-* 平均时间复杂度：$$\mathcal{O}(n * k)$$
-* 最好时间复杂度：$$\mathcal{O}(n * k)$$
-* 最坏时间复杂度：$$\mathcal{O}(n * k)$$
-* 最坏空间复杂度：$$\mathcal{O}(n + k)$$
+* 平均时间复杂度：$$ \mathcal{O}(n * k) $$
+* 最好时间复杂度：$$ \mathcal{O}(n * k) $$
+* 最坏时间复杂度：$$ \mathcal{O}(n * k) $$
+* 最坏空间复杂度：$$ \mathcal{O}(n + k) $$
 * 稳定性：稳定
 * 排序方式：非原地（not-in-place）
 
