@@ -67,4 +67,5 @@
   * [二叉树的遍历](ji-chu-suan-fa/er-cha-shu-de-bian-li.md)
 * [HTTP](http.md)
   * [HTTP 基础](http/http-ji-chu.md)
+  * [HTTP 缓存](http/http-cache.md)
 
