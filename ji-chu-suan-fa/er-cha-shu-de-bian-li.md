@@ -14,15 +14,20 @@ class TreeNode {
 }
 ```
 
-二叉树的遍历方式主要分为：
+二叉树的遍历方式主要分为 **深度优先（Deep-first Search, DFS）** 和 **广度优先（Breadth-first Search，BFS）**。
 
-1. 前序遍历
-2. 中序遍历
-3. 后序遍历
-4. 深度优先
-5. 广度优先
+其中深度优先遍历有以下几种方法
 
-## 前序遍历
+1. **前序遍历**
+2. **中序遍历**
+3. **后序遍历**
+
+## 深度优先
+
+深度优先顾名思义就是先纵向搜索，在进入下一个兄弟节点之前，尽可能的向下搜索每一个子节点。
+该算法从根节点开始（在图的情况下选择一些任意节点作为根节点）并在回溯之前尽可能地沿着每个分支进行探索。
+
+### 前序遍历
 
 前序遍历（pre-order）的访问顺序是 DLR
 
@@ -32,7 +37,7 @@ class TreeNode {
 
 上图的前序遍历顺序为: ABDGHCEIF
 
-### 前序遍历的递归方式
+#### 前序遍历的递归方式
 
 ```js
 function preOrder(root) {
@@ -46,7 +51,7 @@ function preOrder(root) {
 }
 ```
 
-### 前序遍历的非递归方式
+#### 前序遍历的非递归方式
 
 对于任一结点 `P`：
 
@@ -73,7 +78,7 @@ function preOrderWithoutRecursion(root) {
 }
 ```
 
-## 中序遍历
+### 中序遍历
 
 中序遍历（in-order）的顺序是 LDR
 
@@ -81,7 +86,7 @@ function preOrderWithoutRecursion(root) {
 
 上图的中序遍历顺序为: GDHBAEICF
 
-### 中序遍历的递归方式
+#### 中序遍历的递归方式
 
 ```js
 function inOrder(root) {
@@ -95,7 +100,7 @@ function inOrder(root) {
 }
 ```
 
-### 中序遍历的非递归方式
+#### 中序遍历的非递归方式
 
 对于任一结点 `P`：
 
@@ -121,7 +126,7 @@ function inOrderWithoutRecursion(root) {
 }
 ```
 
-## 后序遍历
+### 后序遍历
 
 后序遍历（post order）的顺序是 LRD
 
@@ -129,7 +134,7 @@ function inOrderWithoutRecursion(root) {
 
 上图的后序遍历顺序为: GHDBIEFCA
 
-### 后序遍历的递归方式
+#### 后序遍历的递归方式
 
 ```js
 function postOrder(root) {
@@ -144,7 +149,7 @@ function postOrder(root) {
 }
 ```
 
-### 后序遍历的非递归方式
+#### 后序遍历的非递归方式
 
 ```js
 function postOrderWithoutRecursion(root) {
@@ -162,8 +167,8 @@ function postOrderWithoutRecursion(root) {
       (!node.right && last === node.left) ||
       last === node.right
     ) {
-      console.log(node.val);
       // doing something
+      // console.log(node.val);
       last = node;
       stack.pop();
     } else {
@@ -173,6 +178,35 @@ function postOrderWithoutRecursion(root) {
       if (node.left) {
         stack.push(node.left);
       }
+    }
+  }
+}
+```
+
+## 广度优先遍历
+
+广度优先遍历，也可以称之为层级遍历，先访问兄弟节点，再访问子节点。
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Sorted_binary_tree_breadth-first_traversal.svg/220px-Sorted_binary_tree_breadth-first_traversal.svg.png)
+
+上图的后序遍历顺序为: FBGADICEH 
+
+```js
+function bfs(root) {
+  if (!root) {
+    return;
+  }
+  const queue = [root];
+
+  while (queue.length > 0) {
+    const node = queue.shift();
+    // do something
+    // console.log(node.val)
+    if (node.left) {
+      queue.push(node.left);
+    }
+    if (node.right) {
+      queue.push(node.right);
     }
   }
 }
