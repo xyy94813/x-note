@@ -1,4 +1,4 @@
-# React Diff算法核心
+# React Diff 算法核心
 
 > **Diff 算法**，即差异比较算法，是 React 实现原理的核心之一，React 通过此算法比较每次更新之后子虚拟 DOM 树种最小的差异点，并进行计算。
 
@@ -8,21 +8,21 @@
 
 ```jsx
 class MyComponent extends React.Component {
-    render () {
-        const { isFirst } = this.props;
-        if (isFirst ) {
-            return (
-             <div className="first">
-                <span>A Span</span>
-             </div>
-            );
-        }
-        return (
-            <div className="second">
-                <p>A Paragraph</p>
-            </div>
-        );
+  render() {
+    const { isFirst } = this.props;
+    if (isFirst) {
+      return (
+        <div className="first">
+          <span>A Span</span>
+        </div>
+      );
     }
+    return (
+      <div className="second">
+        <p>A Paragraph</p>
+      </div>
+    );
+  }
 }
 ```
 
@@ -39,9 +39,10 @@ class MyComponent extends React.Component {
 创建一个节点
 
 ```html
-<div className="first">
-    <span>A Span</span>
-</div>;
+<div className="first">
+  <span>A Span</span>
+</div>
+;
 ```
 
 从第一步到第二步:
@@ -52,35 +53,144 @@ class MyComponent extends React.Component {
 从第二步到卸载组件:
 
 删除节点
+
 ```html
 <div className="second">
-    <p>A Paragraph</p>
+  <p>A Paragraph</p>
 </div>
 ```
 
 ## Diff 算法核心
 
-#### 按层级划分
+区分两棵树时，React 首先比较两个根元素。行为因根元素的类型而异。
 
-找到两棵任意的树之间的最小的差异是一个复杂度为`O(n3)`的问题。对此，React 根据 Web 应用的特点**（Web 应用很少有 component 移动到树的另一个层级，它们大部分只是在相邻的子节点之间移动）**，尝试将树按照层级进行分解，最终达到了接近`O(n)`的复杂度。
+找到两棵任意的树之间的最小的差异是一个复杂度为`O(n3)`的问题，
+React Diff 算法根据 Web 应用的特点 **（Web 应用很少有 component 移动到树的另一个层级，它们大部分只是在相邻的子节点之间移动）** 作出以下两个假设，最终达到了接近`O(n)`的复杂度：
+
+1. 不同类型的两个元素将产生不同的树。
+2. 开发人员可以使用 props `key` 提示哪些子元素在不同渲染中可以保持稳定。
 
 ![](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/1.png)
 
-#### 列表
+### 不同类型的 React Element
 
-假设有一个 component，一个循环渲染了多个 component，随后又在列表中间插入一个新的 component，根据现有的信息很难知道如何在这两个组件列表之间做映射。
+每当根元素具有不同类型时，React 都会拆开旧树并从头开始构建新树。从 `<a>` 到 `<img>`，或从 `<Article>` 到 `<Comment>`，或从 `<Button>` 到 `<div>` -任何这些都将导致完全重建。
 
-默认情况下，react 会将前一个列表第一个 component 和后一个列表的第一个 component 关联起来，如此类推。因此你可以给 list 中每一个组件设置一个`key`属性帮助 react 来处理它们之间的对应关系。
+拆除树时，旧的 DOM 节点将被破坏。
+组件实例接收 `componentWillUnmount()`。
+建立新树时，会将新的 DOM 节点插入到 DOM 中。
+组件实例接收 `componentWillMount()`，然后接收 `componentDidMount()`。
+与旧树关联的任何状态都将丢失。
+根目录下的所有组件也将被卸载并破坏其状态。
 
-> React 中渲染多个组件如果不包含`key`属性，你将会在控制面板看到这个警告
+```jsx
+<div>
+  <Counter />
+</div>
+
+<span>
+  <Counter />
+</span>
+```
+
+这将销毁旧的 `Counter`，然后重新安装新的 `Counter`。
+
+### 同类型的 DOM Element
+
+比较两个相同类型的 React DOM 元素时，React 会查看两者的属性，保留相同的基础 DOM 节点，并仅更新更改的属性。
+
+```jsx
+<div className="before" title="stuff" />
+
+<div className="after" title="stuff" />
+```
+
+通过比较这两个元素，React 知道只修改底层 DOM 节点上的 className。
+
+在更新样式时，React 还知道仅更新已更改的属性。
+
+```jsx
+<div style={{color: 'red', fontWeight: 'bold'}} />
+
+<div style={{color: 'green', fontWeight: 'bold'}} />
+```
+
+在这两个元素之间进行转换时，React 知道仅修改颜色样式，而不修改 fontWeight。
+
+处理完 DOM 节点后，React 然后在子节点上递归。
+
+### 同类型的 React Element
+
+组件更新时，实例保持不变，因此在渲染之间保持状态。 React 更新基础组件实例的属性以匹配新元素，并在基础实例上调用 `componentWillReceiveProps()`和 `componentWillUpdate()`。
+
+接下来，调用 `render()`方法，并且 diff 算法根据先前的结果和新的结果进行递归。
+
+### 递归子节点
+
+默认情况下，在 DOM 节点的子节点上递归时，React 只会同时遍历两个子节点列表，并在存在差异时生成一个更新操作。
+
+例如，在子元素的末尾添加元素时，在这两个树之间进行转换会很好：
+
+```jsx
+<ul>
+  <li>first</li>
+  <li>second</li>
+</ul>
+// to
+<ul>
+  <li>first</li>
+  <li>second</li>
+  <li>third</li>
+</ul>
+```
+
+React 会匹配两个 `<li>first</li>` 树，两个 `<li>second</li>` 树，然后插入一个 `<li>third</li>` 树。（这看起来很不错）
+
+但是，对于下列例子则会导致糟糕的性能。
+
+```jsx
+<ul>
+  <li>Duke</li>
+  <li>Villanova</li>
+</ul>
+// to
+<ul>
+  <li>Connecticut</li>
+  <li>Duke</li>
+  <li>Villanova</li>
+</ul>
+```
+
+React 会操作每个子节点，而不是使`<li>Duke</li>` 和 `<li>Villanova</li>`保持不变，并在前面插入 `<li>Connecticut</li>`
+
+> React 中渲染多个组件如果不包含 `key` 属性，你将会在控制面板看到这个警告
 > "Warning: Each child in an array or iterator should have a unique 'key' prop.
+
+### React Key
+
+React 支持 `key` 属性。当子项具有 `key` 时，React 使用该键将原始树中的子项与后续树中的子项进行匹配。
+
+```jsx
+<ul>
+  <li key="2015">Duke</li>
+  <li key="2016">Villanova</li>
+</ul>
+
+<ul>
+  <li key="2014">Connecticut</li>
+  <li key="2015">Duke</li>
+  <li key="2016">Villanova</li>
+</ul>
+```
+
+现在，React 知道 key 为 `2014` 的元素是新元素，而 Key 为 `2015` 和 `2016` 的元素刚刚移动。
 
 ![](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/2.png)
 
+所以不得已时，您可以将数组中项目的索引作为键传递。但是使用索引作为 key 式，重新排序会很慢。
 
-#### 组件比对
-
-React 应用通常由用户定义的 component 组合而成，这些 component 通常是一个由很多`div`组成的树。对此，React 只会匹配相同`class`的 component。例如`<AComponent/>`被`<BComponet/>`替换掉，React  会直接移除`AComponent`，然后创建`Bcomponent`，不会再对这两个组件的内部细节进行比对。
+- [使用 Key 作为索引可能会导致的问题](https://reactjs.org/redirect-to-codepen/reconciliation/index-used-as-key)
+- [不使用索引作为键如何解决这些重新排序，排序和前置问题](https://reactjs.org/redirect-to-codepen/reconciliation/no-index-used-as-key)
 
 ## 参考
 
