@@ -83,6 +83,7 @@ interface FiberProperty = {
   memoizedProps: Object;
   pendingWorkPriority: Number;
   alternate: 'flush' | 'work-in-progress';
+  output: HostComponent;
 };
 
 class Fiber<P = {}> extends FiberProperty<P> {}
