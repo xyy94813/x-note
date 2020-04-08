@@ -27,7 +27,7 @@ typeof null === 'object'; // true, 这是一个内部bug
 
 ## bigint
 
-`bigint` 能表示大于 $$ 2^53 - 1 $$ 的整数
+`bigint` 能表示大于 $$ 2^(53) - 1 $$ 的整数
 
 ```js
 const bigInt = 1111111111111111111111111111111111111111n; // 字面量声明
@@ -74,5 +74,5 @@ const e = b + c; // 3n
 bigint 转换成 bool 时与 number 类似
 
 ```js
-0n || 12n || 3n // 12n
+0n || 12n || 3n; // 12n
 ```
