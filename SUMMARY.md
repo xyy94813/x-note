@@ -54,6 +54,7 @@
   - [前端模块化系统](fe/qian-duan-mo-kuai-hua-xi-tong.md)
   - [重绘与重排](fe/zhong-hui-yu-zhong-pai.md)
   - [XSS](/fe/xss.md)
+  - [XSRF](/fe/XSRF.md)
 - [正则表达式](zheng-ze-biao-da-shi.md)
   - [正则表达式基础](zheng-ze-biao-da-shi/zheng-ze-biao-da-shi-ji-chu.md)
   - [正则表达式的悲观回溯](zheng-ze-biao-da-shi/zheng-ze-biao-da-shi-de-bei-guan-hui-su.md)
