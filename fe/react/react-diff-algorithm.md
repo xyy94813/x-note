@@ -69,7 +69,7 @@ class MyComponent extends React.Component {
 1. 不同类型的两个元素将产生不同的树。
 2. 开发人员可以使用 props `key` 提示哪些子元素在不同渲染中可以保持稳定。
 
-![](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/1.png)
+![How React Compare two tree](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/1.png)
 
 ### 不同类型的 React Element
 
@@ -184,7 +184,7 @@ React 支持 `key` 属性。当子项具有 `key` 时，React 使用该键将原
 
 现在，React 知道 key 为 `2014` 的元素是新元素，而 Key 为 `2015` 和 `2016` 的元素刚刚移动。
 
-![](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/2.png)
+![Rerender With Key](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/2.png)
 
 所以不得已时，您可以将数组中项目的索引作为键传递。但是使用索引作为 key 式，重新排序会很慢。
 

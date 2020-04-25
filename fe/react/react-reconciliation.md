@@ -17,7 +17,7 @@ React 基于两个假设实现了一种启发式 $$ O(n) $$ 算法：
 
 ![](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/1.png)
 
-## [React Diff 算法](react-diffsuan-fa-he-xin.md)
+## [React Diff 算法](react-diff-algorithm.md)
 
 ## 权衡 React Reconciliation
 
