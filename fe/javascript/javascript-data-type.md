@@ -17,12 +17,48 @@ JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2
 
 > 无论是 Map, Set, RegExp, Array 等全是基于 object
 
-#### 补充说明：
+> Note： `typeof null === 'object'` 返回 true，内部 BUG 且无法修复。
 
-在使用 `typeof` 判断一个变量的类型时需要注意这个问题
+## Why typeof(null) is object
 
-```js
-typeof null === 'object'; // true, 这是一个内部bug
+早期的 JavaScript 使用 32 bit 存值，包括一个表示类型的标记(1-3 位)和值的实际数据。
+
+类型标记存储在低位上。
+
+- `1` Int
+- `000` Object
+- `010` Douvle
+- `100` String
+- `110` Boolean
+
+特殊值
+
+- `undefined` 用整数 `−2**30` 次方，溢出的方式表示
+- `null` 机器空指针，标志位也是 `000`。
+
+`typeof` 是基于类型的标记做的判断，因此 `typeof null === 'object'`
+
+```C++
+// From: https://dxr.mozilla.org/mozilla-central/source/js/public/Value.h#57
+// Use enums so that printing a JS::Value in the debugger shows nice
+// symbolic type tags.
+
+enum JSValueType : uint8_t {
+  JSVAL_TYPE_DOUBLE = 0x00,
+  JSVAL_TYPE_INT32 = 0x01,
+  JSVAL_TYPE_BOOLEAN = 0x02,
+  JSVAL_TYPE_UNDEFINED = 0x03,
+  JSVAL_TYPE_NULL = 0x04,
+  JSVAL_TYPE_MAGIC = 0x05,
+  JSVAL_TYPE_STRING = 0x06,
+  JSVAL_TYPE_SYMBOL = 0x07,
+  JSVAL_TYPE_PRIVATE_GCTHING = 0x08,
+  JSVAL_TYPE_BIGINT = 0x09,
+  JSVAL_TYPE_OBJECT = 0x0c,
+
+  // This type never appears in a Value; it's only an out-of-band value.
+  JSVAL_TYPE_UNKNOWN = 0x20
+};
 ```
 
 ## bigint
