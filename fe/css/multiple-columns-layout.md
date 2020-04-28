@@ -2,11 +2,11 @@
 
 常见的多列布局：
 
-* 左列定宽，右列自适应
-* 右列定宽，左列自适应
-* 一列不定宽，一列自适应
-* 两侧定宽，中栏自适应
-* 多列等分布局
+- 左列定宽，右列自适应
+- 右列定宽，左列自适应
+- 一列不定宽，一列自适应
+- 两侧定宽，中栏自适应
+- 多列等分布局
 
 ### 左列定宽，右列自适应
 
@@ -24,8 +24,8 @@
 
 ```html
 <div class="float-and-margin">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -33,31 +33,31 @@
 
 ```css
 .left {
-    width: 100px; 
-    float: left; 
+  width: 100px;
+  float: left;
 }
 .right-fix {
-    width: 100%;
-    margin-left: -100px;
-    float: right;
+  width: 100%;
+  margin-left: -100px;
+  float: right;
 }
 .right {
-    margin-left: 100px;
+  margin-left: 100px;
 }
 ```
 
 ```html
 <div class="float-and-margin-fix">
-    <div class="right-fix">
-        <div class="right"></div>
-    </div>
-    <div class="left"></div>
+  <div class="right-fix">
+    <div class="right"></div>
+  </div>
+  <div class="left"></div>
 </div>
 ```
 
 使用`float`和`overflow`实现。
 
-> 左侧 left 设置`float`脱离文档流，右侧利用`overflow: hidden`触发 **BFC模式**。  
+> 左侧 left 设置`float`脱离文档流，右侧利用`overflow: hidden`触发 **BFC 模式**。  
 > 浮动无法影响，隔离其它元素（IE6 不支持）
 
 ```css
@@ -72,8 +72,8 @@
 
 ```html
 <div class="float-and-overflow">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -96,8 +96,8 @@
 
 ```html
 <div class="table-and-table-cell parent">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -119,8 +119,8 @@
 
 ```html
 <div class="flex-layout parent">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -135,8 +135,8 @@
 
 ```html
 <div class="grid-layout parent">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -146,20 +146,20 @@
 
 ```css
 .left {
-  margin-right: -100px; 
+  margin-right: -100px;
   width: 100%;
   float: left;
 }
 .right {
-  float: right; 
+  float: right;
   width: 100px;
 }
 ```
 
 ```html
 <div class="float-and-margin">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -182,8 +182,8 @@
 
 ```html
 <div class="table-and-table-cell parent">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -203,8 +203,8 @@
 
 ```html
 <div class="flex-layout parent">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -213,14 +213,14 @@
 ```css
 .parent {
   display: grid;
-  grid-template-columns: 1fr 100px ;
+  grid-template-columns: 1fr 100px;
 }
 ```
 
 ```html
 <div class="grid-layout parent">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -230,7 +230,7 @@
 
 ```css
 .left {
-  float: left
+  float: left;
 }
 .right {
   overflow: hidden;
@@ -239,8 +239,8 @@
 
 ```html
 <div class="float-and-overflow">
-    <div class="left">inline</div>
-    <div class="right"></div>
+  <div class="left">inline</div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -263,8 +263,8 @@
 
 ```html
 <div class="tabel-layout parent">
-    <div class="left"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -303,9 +303,9 @@
 
 ```html
 <div class="float-and-margin parent">
-    <div class="left"></div>
-    <div class="right"></div>
-    <div class="center"></div>
+  <div class="left"></div>
+  <div class="right"></div>
+  <div class="center"></div>
 </div>
 ```
 
@@ -313,8 +313,8 @@
 
 ```css
 .parent {
-  width: 100%; 
-  display: table; 
+  width: 100%;
+  display: table;
   table-layout: fixed;
 }
 .left {
@@ -332,9 +332,9 @@
 
 ```html
 <div class="table-layout parent">
-    <div class="left"></div>
-    <div class="center"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="center"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -357,9 +357,9 @@
 
 ```html
 <div class="flex-layout parent">
-    <div class="left"></div>
-    <div class="center"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="center"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -374,13 +374,21 @@
 
 ```html
 <div class="grid-layout parent">
-    <div class="left"></div>
-    <div class="center"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="center"></div>
+  <div class="right"></div>
 </div>
 ```
 
 圣杯布局
+
+```html
+<div class="holy-grail-layout parent">
+  <div class="center"></div>
+  <div class="left"></div>
+  <div class="right"></div>
+</div>
+```
 
 ```css
 .parent {
@@ -408,43 +416,51 @@
 }
 ```
 
-```html
-<div class="holy-grail-layout parent">
-    <div class="center"></div>
-    <div class="left"></div>
-    <div class="right"></div>
-</div>
-```
-
 双飞翼布局
-
-```css
-
-.parent {
-  overflow: hidden;
-}
-.left {
-  float: left;
-  margin-left: -100%;
-  width: 100px;
-}
-.right {
-  float: left;
-  margin-left: -100px;
-  width: 100px;
-}
-.center {
-  float: left;
-  width: 100%;
-}
-```
 
 ```html
 <div class="double-wing-layout parent">
-    <div class="center"></div>
-    <div class="left"></div>
-    <div class="right"></div>
+  <div id="header"></div>
+  <div id="container" class="column">
+    <div id="center"></div>
+  </div>
+  <div id="left" class="column"></div>
+  <div id="right" class="column"></div>
+  <div id="footer"></div>
 </div>
+```
+
+```css
+.double-wing-layout.parent {
+  min-width: 500px;
+}
+
+#container {
+  width: 100%;
+}
+
+.column {
+  float: left;
+}
+
+#center {
+  margin-left: 200px;
+  margin-right: 150px;
+}
+
+#left {
+  width: 200px;
+  margin-left: -100%;
+}
+
+#right {
+  width: 150px;
+  margin-left: -150px;
+}
+
+#footer {
+  clear: both;
+}
 ```
 
 ## 多列等宽布局
@@ -462,9 +478,9 @@
 
 ```html
 <div class="flex-layout parent">
-    <div class="left column"></div>
-    <div class="center column"></div>
-    <div class="right column"></div>
+  <div class="left column"></div>
+  <div class="center column"></div>
+  <div class="right column"></div>
 </div>
 ```
 
@@ -479,9 +495,9 @@
 
 ```html
 <div class="grid-layout parent">
-    <div class="left"></div>
-    <div class="center"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="center"></div>
+  <div class="right"></div>
 </div>
 ```
 
@@ -496,11 +512,8 @@
 
 ```html
 <div class="column-layout parent">
-    <div class="left"></div>
-    <div class="center"></div>
-    <div class="right"></div>
+  <div class="left"></div>
+  <div class="center"></div>
+  <div class="right"></div>
 </div>
 ```
-
-
-
