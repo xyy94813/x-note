@@ -23,15 +23,16 @@ DEMO：
     padding: 10px 20px 30px 40px;
     width: 200px;
     height: 300px;
-    border: 1px solid #000;
+    border: 8px solid #000;
+    background: green;
   }
 </style>
 <div class="box" id="box">box</div>
 <script>
   const $box = document.querySelector("#box");
   const $boxRect = $box.getBoundingClientRect();
-  console.log($boxRect.width === 200 + 20 + 40 + 1 * 2); // true
-  console.log($boxRect.height === 300 + 10 + 30 + 1 * 2); // true
+  console.log($boxRect.width === 200 + 20 + 40 + 8 * 2); // true
+  console.log($boxRect.height === 300 + 10 + 30 + 8 * 2); // true
 </script>
 ```
 
@@ -63,7 +64,8 @@ DEMO：
     padding: 10px 20px 30px 40px;
     width: 200px;
     height: 300px;
-    border: 1px solid #000;
+    border: 8px solid rgba(0, 0, 0, 0.3);
+    background: green;
   }
 </style>
 <div class="box" id="box">box</div>
