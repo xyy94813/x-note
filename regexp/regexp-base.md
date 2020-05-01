@@ -132,8 +132,8 @@ reg.test("12"); // false
 | `(?<!exp)` | 匹配前面跟的不是表达式 exp 的位置 |
 
 ```js
-function isASiteDomain(url) {
-  const regexp = /^https{0,1}\:\/\/(\w+?\.)*?example\.com(?!\.)/;
+function isExampleSiteDomain(url) {
+  const regexp = /^https{0,1}\:\/\/(\w+?\.)*?example\.com(?!\.|\w)/;
   return regexp.test(url);
 }
 
@@ -143,18 +143,20 @@ const testCases = [
   "http://www.cn.example.com",
   "https://example.com/asd?a=1",
   "https://example.com/?a=1",
+  "http://www.cn.example.com#hash",
   "https://example.qq.com/asd",
   "https://qq.com?redirect=https://example.com.cn?a=1",
   "http://example.com.qq.com",
   "http://qq.com/?url=example.com",
   "http://qqexample.com",
+  "http://www.cn.example.com1",
 ];
 
-testCases.forEach((case) => {
-  console.log(isASiteDomain(case));
+testCases.forEach((_case) => {
+  console.log(isASiteDomain(_case));
 });
 // true * 5
-// false * 5
+// false * 6
 ```
 
 **注释**
