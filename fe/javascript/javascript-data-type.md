@@ -1,6 +1,6 @@
 # JavaScript 数据结构与类型
 
-JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2018-03-07
+JavaScript 目前包含七种**原始数据类型\(primitives data type\)** // 2018-03-07
 
 - boolean
 - null
@@ -8,7 +8,7 @@ JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2
 - number
 - string
 - Symbol \(ES6 引入\)
-- bigint
+- bigint \(ES 2020\)
 
 以及两种**基本数据结构\(复合数据结构\)**
 
@@ -17,7 +17,9 @@ JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2
 
 > 无论是 Map, Set, RegExp, Array 等全是基于 object
 
-> Note： `typeof null === 'object'` 返回 true，内部 BUG 且无法修复。
+> Note：
+> `typeof null === 'object'` 返回 true，内部 BUG 且无法修复。
+> `typeof NaN === 'number'` 且 `NaN !== NaN`，只能通过 `Number.isNaN` 判断。`NaN` 的含义是无法表示的数字。
 
 ## Why typeof(null) is object
 
@@ -27,7 +29,7 @@ JavaScript 目前包含六种**原始数据类型\(primitives data type\)** // 2
 
 - `1` Int
 - `000` Object
-- `010` Douvle
+- `010` Double
 - `100` String
 - `110` Boolean
 
@@ -67,14 +69,14 @@ enum JSValueType : uint8_t {
 
 ```js
 const bigInt = 1111111111111111111111111111111111111111n; // 字面量声明
-const bigInt2 = new BigInt('1'); // 内置对象生命
+const bigInt2 = new BigInt("1"); // 内置对象生命
 ```
 
 使用 typeof 测试时， BigInt 对象返回 "bigint"
 
 ```js
-typeof 1n === 'bigint'; // true
-typeof BigInt('1') === 'bigint'; // true
+typeof 1n === "bigint"; // true
+typeof BigInt("1") === "bigint"; // true
 ```
 
 `bigint` 只能与 `bigint` 进行运算，不能直接与 `number` 进行运算。
