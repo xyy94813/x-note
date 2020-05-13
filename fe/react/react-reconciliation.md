@@ -1,5 +1,7 @@
 # React Reconciliation
 
+**将 虚拟 DOM 和 DOM 同步的过程称为协调（reconciliation）**
+
 React 提供了声明式的 API 让你不需要担心每次更新都改变了什么，这使得编写 APP 变得更加容易。
 
 使用 React 时，您可以在单个时间点将 `render()` 函数视为创建 React Element Tree。
