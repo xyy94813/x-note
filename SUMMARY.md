@@ -56,6 +56,7 @@
   - [重绘与重排](fe/re-paint-and-re-flow.md)
   - [XSS](/fe/xss.md)
   - [XSRF](/fe/XSRF.md)
+  - [webp 兼容方案](/fe/webp-compatibility.md)
 - [正则表达式](regexp.md)
   - [正则表达式基础](regexp/regexp-base.md)
   - [正则表达式的悲观回溯](regexp/regexp-pessimistic-backtracking.md)
