@@ -10,3 +10,4 @@
 - [重绘与重排](/fe/re-paint-and-re-flow.md)
 - [XSS](/fe/xss.md)
 - [XSRF](/fe/XSRF.md)
+- [webp 兼容方案](/fe/webp-compatibility.md)
