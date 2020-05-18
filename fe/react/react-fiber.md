@@ -183,6 +183,15 @@ current Fiber 的 alternate 是 work-in-progress ，而 work-in-progress 的 alt
 
 输出是最终提供给渲染器的输出，以便可以将更改刷新到渲染环境。定义输出的创建和更新方式是渲染器的责任。
 
+## Todo In Feature
+
+- 调度程序如何找到要执行的下一个工作单元。
+- 如何通过光纤树跟踪和传播优先级。
+- 调度程序如何知道何时暂停和继续工作。
+- 如何刷新工作并将其标记为完成。
+- 副作用（例如生命周期方法）如何工作。
+- 协程是什么，以及如何用于实现上下文和布局等功能。
+
 ## 参考
 
 - [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
