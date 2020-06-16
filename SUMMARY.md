@@ -50,6 +50,8 @@
     - [React Fiber](/fe/react/react-fiber.md)
     - [React Context API](fe/react/react-context-api.md)
     - [React Refs](fe/react/react-refs.md)
+    - [React HMR](/fe/react/react-hmr.md)
+    - [React Hook](/fe/react/react-hook.md)
   - [WEB 客户端存储](fe/web-ke-hu-duan-cun-chu.md)
   - [常用工具](fe/chang-yong-gong-ju.md)
   - [前端模块化系统](fe/qian-duan-mo-kuai-hua-xi-tong.md)
