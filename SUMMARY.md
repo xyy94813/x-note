@@ -78,7 +78,7 @@
   - [基数排序](ji-chu-suan-fa/radix-sort.md)
   - [二叉树的遍历](ji-chu-suan-fa/er-cha-shu-de-bian-li.md)
 - [HTTP](http.md)
-  - [HTTP 基础](http/http-ji-chu.md)
+  - [HTTP 基础](http/http-basic.md)
   - [HTTP 缓存](http/http-cache.md)
   - [HTTP-2](/http/http2.md)
   - [HTTPS](/http/https.md)
