@@ -48,6 +48,7 @@
     - [React Reconciliation](/fe/react/react-reconciliation.md)
     - [React Diff 算法核心](fe/react/react-diff-algorithm.md)
     - [React Fiber](/fe/react/react-fiber.md)
+    - [React Scheduling](/fe/react/react-scheduling.md)
     - [React Context API](fe/react/react-context-api.md)
     - [React Refs](fe/react/react-refs.md)
     - [React HMR](/fe/react/react-hmr.md)
