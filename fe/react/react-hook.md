@@ -106,7 +106,7 @@ Additional：
 example：
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function Example() {
   // Declare a new state variable, which we'll call "count"
@@ -177,7 +177,7 @@ React 组件有两种常见的副作用：不需要清除的副作用和需要�
 example base on `useState` example:
 
 ```jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Example() {
   const [count, setCount] = useState(0);
@@ -208,7 +208,7 @@ function Example() {
 example：
 
 ```jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function FriendStatus(props) {
   const [isOnline, setIsOnline] = useState(null);
@@ -225,9 +225,9 @@ function FriendStatus(props) {
   });
 
   if (isOnline === null) {
-    return 'Loading...';
+    return "Loading...";
   }
-  return isOnline ? 'Online' : 'Offline';
+  return isOnline ? "Online" : "Offline";
 }
 ```
 
@@ -294,12 +294,12 @@ React 会推迟 useEffect 直到浏览器绘制完成后再运行，因此进行
 ```jsx
 const themes = {
   light: {
-    foreground: '#000000',
-    background: '#eeeeee',
+    foreground: "#000000",
+    background: "#eeeeee",
   },
   dark: {
-    foreground: '#ffffff',
-    background: '#222222',
+    foreground: "#ffffff",
+    background: "#222222",
   },
 };
 
@@ -339,9 +339,9 @@ const initialState = { count: 0 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'increment':
+    case "increment":
       return { count: state.count + 1 };
-    case 'decrement':
+    case "decrement":
       return { count: state.count - 1 };
     default:
       throw new Error();
@@ -353,8 +353,8 @@ function Counter() {
   return (
     <>
       Count: {state.count}
-      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
     </>
   );
 }
@@ -380,11 +380,11 @@ const init = (initialCount) => ({ count: initialCount });
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'increment':
+    case "increment":
       return { count: state.count + 1 };
-    case 'decrement':
+    case "decrement":
       return { count: state.count - 1 };
-    case 'reset':
+    case "reset":
       return init(action.payload);
     default:
       throw new Error();
@@ -397,12 +397,12 @@ function Counter({ initialCount }) {
     <>
       Count: {state.count}
       <button
-        onClick={() => dispatch({ type: 'reset', payload: initialCount })}
+        onClick={() => dispatch({ type: "reset", payload: initialCount })}
       >
         Reset
       </button>
-      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+      <button onClick={() => dispatch({ type: "increment" })}>+</button>
     </>
   );
 }
@@ -510,7 +510,7 @@ function useFriendStatus(friendID) {
   const [isOnline, setIsOnline] = useState(null);
   // Show a label in DevTools next to this Hook
   // e.g. "FriendStatus: Online"
-  useDebugValue(isOnline ? 'Online' : 'Offline');
+  useDebugValue(isOnline ? "Online" : "Offline");
 
   return isOnline;
 }
@@ -560,10 +560,10 @@ function FriendStatus(props) {
   const isOnline = useFriendStatus(props.friend.id);
 
   if (isOnline === null) {
-    return 'Loading...';
+    return "Loading...";
   }
 
-  return isOnline ? 'Online' : 'Offline';
+  return isOnline ? "Online" : "Offline";
 }
 ```
 
@@ -621,11 +621,11 @@ function AComp() {
 
 ## 参考
 
-[hooks-intro](https://reactjs.org/docs/hooks-intro.html)
-[Hooks at a Glance](https://reactjs.org/docs/hooks-overview.html)
-[Using the State Hook](https://reactjs.org/docs/hooks-state.html)
-[Using the Effect Hook](https://reactjs.org/docs/hooks-effect.html)
-[Rules of Hooks](https://reactjs.org/docs/hooks-rules.html)
-[Building Your Own Hooks](https://reactjs.org/docs/hooks-custom.html)
-[Hooks API Reference](https://reactjs.org/docs/hooks-reference.html)
-[Hooks FAQ](https://reactjs.org/docs/hooks-faq.html)
+- [hooks-intro](https://reactjs.org/docs/hooks-intro.html)
+- [Hooks at a Glance](https://reactjs.org/docs/hooks-overview.html)
+- [Using the State Hook](https://reactjs.org/docs/hooks-state.html)
+- [Using the Effect Hook](https://reactjs.org/docs/hooks-effect.html)
+- [Rules of Hooks](https://reactjs.org/docs/hooks-rules.html)
+- [Building Your Own Hooks](https://reactjs.org/docs/hooks-custom.html)
+- [Hooks API Reference](https://reactjs.org/docs/hooks-reference.html)
+- [Hooks FAQ](https://reactjs.org/docs/hooks-faq.html)
