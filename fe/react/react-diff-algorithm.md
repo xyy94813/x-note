@@ -169,22 +169,97 @@ React 会操作每个子节点，而不是使`<li>Duke</li>` 和 `<li>Villanova<
 
 React 支持 `key` 属性。当子项具有 `key` 时，React 使用该键将原始树中的子项与后续树中的子项进行匹配。
 
+![Rerender With Key](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/2.png)
+
+[React Render with Key in React v15](https://github.com/facebook/react/blob/d1c08f11d5e1ad03eb92a58b599562a010a68734/src/renderers/shared/reconciler/ReactMultiChild.js#L287-L360)
+
+在对子项进行 diff 时，存在三种类型的操作：
+
+- MOVE_EXISTING -- 存在相同的节点则复用以前的 DOM 节点，做移动操作。
+- INSERT_MARKUP -- 新的节点不在旧集合里则插入新的节点。
+- REMOVE_NODE -- 新集合里在旧集合中对应的 node 不同，不能直接复用和更新，需要执行删除操作，或者旧集合中的节点不在新集合里的。
+
+1. 遍历 newChildrens，基于 key 判断 newChild 是否在 oldChildrens 存在**相同的节点**.
+   1. 如果存在相同节点(prevChild === nextChild)
+      1. 判断原先节点的变化顺序（不考虑头部新插入的节点）
+         1. 节点的挂载顺序变大（从前往后），移动节点
+         2. 节点的挂载顺序变小（从后往前或不变），不做操作
+      2. 节点的 `_mountIndex` 变为新集合中的 index
+   2. 如果不存在相同节点，
+      1. 之前存在相同
+      2. 在上一个新集合中的节点后插入新节点
+2. 遍历 oldChildrens，移除在新集合中不存在的节点 (???)
+
 ```jsx
+// befor
 <ul>
   <li key="2015">Duke</li>
   <li key="2016">Villanova</li>
+  <li key="2017">Alex</li>
+  <li key="2018">Frank</li>
 </ul>
 
+// after
 <ul>
   <li key="2014">Connecticut</li>
+  <li key="2018">Frank</li>
   <li key="2015">Duke</li>
   <li key="2016">Villanova</li>
 </ul>
 ```
 
-现在，React 知道 key 为 `2014` 的元素是新元素，而 Key 为 `2015` 和 `2016` 的元素刚刚移动。
+对与上述例子 DOM 节点的变化顺序为
 
-![Rerender With Key](https://calendar.perfplanet.com/wp-content/uploads/2013/12/vjeux/2.png)
+```jsx
+// step 1
+// 插入新的节点 `<li key="2014">Connecticut</li>`
+<ul>
+  <li key="2014">Connecticut</li>
+  <li key="2015">Duke</li>
+  <li key="2016">Villanova</li>
+  <li key="2017">Alex</li>
+  <li key="2018">Frank</li>
+</ul>
+
+// step 2
+// key 2018 向前移动，实际上不做操作
+<ul>
+  <li key="2014">Connecticut</li>
+  <li key="2015">Duke</li>
+  <li key="2016">Villanova</li>
+  <li key="2017">Alex</li>
+  <li key="2018">Frank</li>
+</ul>
+
+// step 3
+// `<li key="2015">Duke</li>` 移动至 `<li key="2018">Frank</li>` 后
+<ul>
+  <li key="2014">Connecticut</li>
+  <li key="2016">Villanova</li>
+  <li key="2017">Alex</li>
+  <li key="2018">Frank</li>
+  <li key="2015">Duke</li>
+</ul>
+
+// step 4
+// `<li key="2016">Villanova</li>` 移动至 `<li key="2015">Duke</li>` 后
+<ul>
+  <li key="2014">Connecticut</li>
+  <li key="2017">Alex</li>
+  <li key="2018">Frank</li>
+  <li key="2015">Duke</li>
+  <li key="2016">Villanova</li>
+</ul>
+
+// step 5
+// 移除新集合中不存在的节点 `<li key="2017">Frank</li>`
+<ul>
+  <li key="2014">Connecticut</li>
+  <li key="2018">Frank</li>
+  <li key="2015">Duke</li>
+  <li key="2016">Villanova</li>
+</ul>
+```
 
 所以不得已时，您可以将数组中项目的索引作为键传递。但是使用索引作为 key 式，重新排序会很慢。
 
@@ -195,3 +270,4 @@ React 支持 `key` 属性。当子项具有 `key` 时，React 使用该键将原
 
 1. [React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)
 2. [官方文档](https://reactjs.org/docs/reconciliation.html)
+3. [React 源码剖析系列 － 不可思议的 react diff](https://zhuanlan.zhihu.com/p/20346379)
