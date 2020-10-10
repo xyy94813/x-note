@@ -94,6 +94,7 @@
 - [gRPC](grpc.md)
   - [gRPC 简介](grpc/grpc-overview.md)
   - [gRPC 基础概念](grpc/grpc-concepts.md)
+  - [GRPC with GraphQL and TypeScript](/grpc/grpc-with-graphql-and-TypeScript.md)
 - [设计模式](design-pattern.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
