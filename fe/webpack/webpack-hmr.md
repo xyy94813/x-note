@@ -9,6 +9,8 @@
 2. 只更新变更内容，以节省宝贵的开发时间。
 3. 调整样式更加快速 - 几乎相当于在浏览器调试器中更改样式。
 
+> In webpack V5, `import.meta.webpackHot` is an alias for `module.hot` which is also available in strict ESM
+
 ## 启用 HMR
 
 在 Webpack 集成了 webpack-dev-server 后，启用 HMR 变得更加简单。
@@ -17,23 +19,23 @@
 ```js
 module.exports = {
   entry: {
-    app: "./src/index.js",
+    app: './src/index.js',
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
-    contentBase: "./dist",
+    contentBase: './dist',
     hot: true, // Only one config to open HMR
   },
   plugins: [
     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: "Hot Module Replacement",
+      title: 'Hot Module Replacement',
     }),
   ],
   output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
 };
 ```
@@ -42,16 +44,16 @@ module.exports = {
 
 ```js
 // index.js
-import _ from "lodash";
-import printMe from "./print.js";
+import _ from 'lodash';
+import printMe from './print.js';
 
 function component() {
-  const element = document.createElement("div");
-  const btn = document.createElement("button");
+  const element = document.createElement('div');
+  const btn = document.createElement('button');
 
-  element.innerHTML = _.join(["Hello", "webpack"], " ");
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
-  btn.innerHTML = "Click me and check the console!";
+  btn.innerHTML = 'Click me and check the console!';
   btn.onclick = printMe;
 
   element.appendChild(btn);
@@ -63,8 +65,8 @@ document.body.appendChild(component());
 
 // 约定重于设计
 if (module.hot) {
-  module.hot.accept("./print.js", function () {
-    console.log("Accepting the updated printMe module!");
+  module.hot.accept('./print.js', function () {
+    console.log('Accepting the updated printMe module!');
     printMe();
   });
 }
@@ -85,8 +87,8 @@ let element = component(); // Store the element to re-render on print.js changes
 document.body.appendChild(element);
 
 if (module.hot) {
-  module.hot.accept("./print.js", function () {
-    console.log("Accepting the updated printMe module!");
+  module.hot.accept('./print.js', function () {
+    console.log('Accepting the updated printMe module!');
     //  printMe();
     document.body.removeChild(element);
     element = component(); // Re-render the "component" to update the click handler
