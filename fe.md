@@ -15,3 +15,4 @@
 - [屏幕测量单位](/fe/measure-unit-of-screen.md)
 - [WEB 客户端存储](/fe/web-browser-storage.md)
 - [WEB SEO](/fe/web-seo.md)
+- [WEB 性能指标](/fe/web-performance-metrics.md)
