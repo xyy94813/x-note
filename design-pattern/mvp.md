@@ -7,7 +7,7 @@ MVP 模式类似于 [MVC 模式](./mvc.md)，其中 Controller 被 Presenter 取
 - 视图（View）
 - 演示者（Presenter）
 
-![mvp-pattern from [Understanding The Difference Between MVC, MVP and MVVM Design Patterns](https://www.linkedin.com/pulse/understanding-difference-between-mvc-mvp-mvvm-design-rishabh-software)](../images/mvp-pattern.jpeg)
+![MVP Pattern Structural Diagram from https://www.linkedin.com/pulse/understanding-difference-between-mvc-mvp-mvvm-design-rishabh-software](../images/mvp-pattern.jpeg)
 
 ## Model
 

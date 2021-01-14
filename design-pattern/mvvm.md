@@ -9,7 +9,7 @@ MVVM 模式支持 View 和 ViewModel 之间的双向数据绑定（data-binding�
 - 视图（View）
 - 视图模型（ViewModel）
 
-![mvvm-pattern from [Understanding The Difference Between MVC, MVP and MVVM Design Patterns](https://www.linkedin.com/pulse/understanding-difference-between-mvc-mvp-mvvm-design-rishabh-software)](../images/mvvm-pattern.jpeg)
+![MVVM Pattern Structural Diagram from https://www.linkedin.com/pulse/understanding-difference-between-mvc-mvp-mvvm-design-rishabh-software](../images/mvvm-pattern.jpeg)
 
 ## Model
 

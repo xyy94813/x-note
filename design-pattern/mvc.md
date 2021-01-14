@@ -9,7 +9,7 @@ MVC 设计模式将一个应用程序分为三个主要方面：
 - 视图（View）
 - 控制器（Controller）
 
-![mvc-pattern from [Understanding The Difference Between MVC, MVP and MVVM Design Patterns](https://www.linkedin.com/pulse/understanding-difference-between-mvc-mvp-mvvm-design-rishabh-software)](../images/mvc-pattern.jpeg)
+![MVC Pattern Structural Diagram from https://www.linkedin.com/pulse/understanding-difference-between-mvc-mvp-mvvm-design-rishabh-software](../images/mvc-pattern.jpeg)
 
 ## Model
 
