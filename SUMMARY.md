@@ -97,3 +97,4 @@
 - [设计模式](design-pattern.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
+  - [MVVM](design-pattern/mvvm.md)
