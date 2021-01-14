@@ -58,7 +58,6 @@
     - [Webpack HMR](/fe/webpack/webpack-hmr.md)
   - [Babel](/fe/babel.md)
     - [@babel/preset-env](/fe/babel/babel-preset-env.md)
-  - [WEB 客户端存储](fe/web-browser-storage.md)
   - [前端模块化系统](fe/qian-duan-mo-kuai-hua-xi-tong.md)
   - [重绘与重排](fe/re-paint-and-re-flow.md)
   - [XSS](/fe/xss.md)
