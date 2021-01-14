@@ -96,3 +96,4 @@
   - [gRPC 基础概念](grpc/grpc-concepts.md)
 - [设计模式](design-pattern.md)
   - [MVC](design-pattern/mvc.md)
+  - [MVP](design-pattern/mvp.md)
