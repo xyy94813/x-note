@@ -57,9 +57,64 @@ DOM 型的特点
 
 ## XSS 防御
 
-综上可知，在以下 2 种情况下，容易发生 XSS 攻击：
+XSS 的本质是 “HTML 注入”，即将用户数据当成代码的一部分，从而混淆语义。
 
-1. 数据从一个不可靠的链接进入到一个 Web 应用程序。
-2. 没有过滤掉恶意代码的动态内容被发送给 Web 用户。
+如果网站使用了 MVC 架构，XSS 则发生在 View 层 -- 拼接变量并输出至 HTML
 
-针对以上两点就能避免 XSS 攻击。
+在对用户数据进行输出时，需要使用到 ESAPI 进行处理。
+
+[node-esapi](https://yarnpkg.com/package/node-esapi)
+
+### 输出检查
+
+当用户数据作为内容展示或者属性时，需要对动态内容进行 `HTMLEncode`。
+
+主要是对 html 标签及一些特殊字符( `”`、`<`、`>`、`&` 等等 )转换成 `HTMLEntities`。
+对应标准 `ISO-8859-1`
+
+```php
+<button>HTMLEncode($var)</button>
+```
+
+```php
+<button id="HTMLEncode($var)">show viewer name</button>
+```
+
+当用户数据作为 JavaScript 中的一部分时，对动态内容采用 `JavaScriptEncode` - `escape()`
+
+```js
+var pos = document.URL.indexOf("name=") + 5;
+document.write(document.URL.substring(escape(pos), document.URL.length));
+```
+
+```php
+<button onClick="console.log(escape($name))">show viewer name</button>
+```
+
+当用户数据作为 CSS 中当一部分时，需要 `ESAPI.encoder().encodeForCSS()`
+
+```php
+<style>@import "http://xss.css";</style>
+<style>body { background: url("xss.htc"); }</style>
+<style>li { list-style-image: url("javascript:alert('XSS')");}</style>
+<div style="background:javascript:alert('XSS')"></div>
+<div style="width:expression(alert('XSS'))"></div>
+```
+
+由于基于 CSS、style、style attribute 形成 XSS 的方式特别多，**尽可能避免用户数据作为 CSS 当一部分**
+
+当用户数据作为 URL 中当一部分时，需要对其进行 `URLEncode`
+
+```php
+<a href="localhost:8080/a?nickName=$var">view info</a>
+```
+
+### 处理富文本
+
+处理富文本时应严格禁止“事件”。
+过滤掉危险标签，最好采用白名单方式。
+
+### Cookie 设置 HttpOnly
+
+Cookie 设置 HttpOnly 后，JS 脚本将无法获取该 Cookie 信息。
+能有效避免 XSS 后的 Cookie 挟持攻击
