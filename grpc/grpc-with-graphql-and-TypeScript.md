@@ -19,19 +19,19 @@ GraphQL 在提供了 [GraphQL schema stitching](https://www.apollographql.com/do
 For GraphQL Server:
 
 - as GraphQL Server
-  - [express-graphql(Offical)](https://github.com/graphql/express-graphql)
-  - [graphql-relay-js(Offical)](https://github.com/graphql/graphql-relay-js)
+  - [express-graphql(Official)](https://github.com/graphql/express-graphql)
+  - [graphql-relay-js(Official)](https://github.com/graphql/graphql-relay-js)
   - [Apollo-Server](https://github.com/apollographql/apollo-server)
 - as gRPC Client
-  - [gRPC-node(Offical)](https://github.com/grpc/grpc-node)
+  - [gRPC-node(Official)](https://github.com/grpc/grpc-node)
     - [@grpc/grpc-js](https://www.npmjs.com/package/@grpc/grpc-js)
     - [grpc](https://www.npmjs.com/package/grpc)
 
-> Tthe difference between `grpc` and `@grpc/grpc-js` see [there](https://github.com/grpc/grpc-node/blob/master/PACKAGE-COMPARISON.md)
+> The difference between `grpc` and `@grpc/grpc-js` see [there](https://github.com/grpc/grpc-node/blob/master/PACKAGE-COMPARISON.md)
 
 如果你的应用还作为 gRPC Server:
 
-- [gRPC-node(Offical)](https://github.com/grpc/grpc-node)
+- [gRPC-node(Official)](https://github.com/grpc/grpc-node)
   - [@grpc/grpc-js](https://www.npmjs.com/package/@grpc/grpc-js)
   - [grpc](https://www.npmjs.com/package/grpc)
 - [mali](https://github.com/malijs/mali)
