@@ -74,6 +74,7 @@
   - [正则表达式的悲观回溯](regexp/regexp-pessimistic-backtracking.md)
 - [Git](git.md)
   - [Git 工作流](git/git-gong-zuo-liu.md)
+  - [Git 内部原理](/git/git-internals.md)
 - [基础算法](basic-algorithm.md)
   - [冒泡排序](basic-algorithm/mao-pao-pai-xu.md)
   - [插入排序](basic-algorithm/cha-ru-pai-xu.md)
