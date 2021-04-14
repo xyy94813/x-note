@@ -98,6 +98,8 @@
   - [gRPC 基础概念](grpc/grpc-concepts.md)
   - [GRPC with GraphQL and TypeScript](/grpc/grpc-with-graphql-and-TypeScript.md)
 - [设计模式](design-pattern.md)
+  - DDD
+    - [模型元素的模式](./design-pattern/domain-driven-design/patterns-of-model-elements.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
   - [MVVM](design-pattern/mvvm.md)
