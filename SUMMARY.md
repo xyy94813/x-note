@@ -68,7 +68,8 @@
   - [屏幕测量单位](/fe/measure-unit-of-screen.md)
   - [WEB 客户端存储](/fe/web-browser-storage.md)
   - [WEB SEO](/fe/web-seo.md)
-  - [WEB 性能指标](/fe/web-performance-metrics.md)
+  - WEB 性能优化
+    - [WEB 性能指标](/fe/web-performance/performance-metrics.md)
 - [正则表达式](regexp.md)
   - [正则表达式基础](regexp/regexp-base.md)
   - [正则表达式的悲观回溯](regexp/regexp-pessimistic-backtracking.md)
