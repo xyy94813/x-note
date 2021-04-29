@@ -71,6 +71,7 @@
   - WEB 性能优化
     - [WEB 性能指标](/fe/web-performance/performance-metrics.md)
     - [WEB 图片优化](/fe/web-performance/optimize-image.md)
+    - [懒加载资源](/fe/web-performance/lazy-loading.md)
 - [正则表达式](regexp.md)
   - [正则表达式基础](regexp/regexp-base.md)
   - [正则表达式的悲观回溯](regexp/regexp-pessimistic-backtracking.md)

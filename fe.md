@@ -18,3 +18,4 @@
 - WEB 性能优化
   - [WEB 性能指标](/fe/web-performance/performance-metrics.md)
   - [WEB 图片优化](/fe/web-performance/optimize-image.md)
+  - [懒加载资源](/fe/web-performance/lazy-loading.md)

@@ -187,6 +187,10 @@ Next.js v10 版本也自带该功能。
 
 与构建脚本相比，CDN 通常更适合于为每个单独的客户端创建大量定制的映像。
 
+## 懒加载图片
+
+参考 [懒加载图片](./lazy-loading.md#懒加载图片)
+
 ## 参考
 
 - [Choose the right image format](https://web.dev/choose-the-right-image-format/)
