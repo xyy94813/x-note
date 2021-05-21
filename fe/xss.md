@@ -39,7 +39,7 @@ WEB 服务器会将注入的脚本反映回用户浏览器，例如错误信息�
   <title>Welcome!</title>
   Hi
   <script>
-    var pos = document.URL.indexOf("name=") + 5;
+    var pos = document.URL.indexOf('name=') + 5;
     document.write(document.URL.substring(pos, document.URL.length));
   </script>
   <br />
@@ -83,7 +83,7 @@ XSS 的本质是 “HTML 注入”，即将用户数据当成代码的一部分�
 当用户数据作为 JavaScript 中的一部分时，对动态内容采用 `JavaScriptEncode` - `escape()`
 
 ```js
-var pos = document.URL.indexOf("name=") + 5;
+var pos = document.URL.indexOf('name=') + 5;
 document.write(document.URL.substring(escape(pos), document.URL.length));
 ```
 
@@ -118,3 +118,7 @@ document.write(document.URL.substring(escape(pos), document.URL.length));
 
 Cookie 设置 HttpOnly 后，JS 脚本将无法获取该 Cookie 信息。
 能有效避免 XSS 后的 Cookie 挟持攻击
+
+### Content-Security-Policy
+
+增加 HTTP 响应头 [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) 限制 UA 能够为指定的页面加载哪些资源。
