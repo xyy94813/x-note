@@ -140,6 +140,14 @@ X-Frame-Options: allow-from https://example.com/
 
 在不支持 x-frame-options 的浏览器中，只能继续使用 Frame Busting。
 
+### Content-Security-Policy
+
+可以通过 [Content-Security-Policy 的 frame-ancestors 指令](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors) 控制哪些页面能够 `<frame>`, `<iframe>`, `<object>`, `<embed>`, 或 `<applet>` 嵌入当前页面。
+
+```
+Content-Security-Policy: frame-ancestors <source>;
+```
+
 ## Reference
 
 - 白帽子讲 WEB 安全
