@@ -96,6 +96,8 @@
   - [HTTP-2](/http/http2.md)
   - [HTTPS](/http/https.md)
   - [自定义 HTTPS 证书](/http/https-ca.md)
+- Protocol Buffers
+  - [Protocol Buffers 基础](/protocol-buffers/protocol-buffers-basic.md)
 - [gRPC](grpc.md)
   - [gRPC 简介](grpc/grpc-overview.md)
   - [gRPC 基础概念](grpc/grpc-concepts.md)
