@@ -84,7 +84,7 @@ First Content Paint（FCP）指标，测量从页面开始加载到屏幕上呈�
 通过 Google 提供的 [web-vitals](https://github.com/GoogleChrome/web-vitals) 库测量 FCP。
 
 ```js
-import { getFCP } from "web-vitals";
+import { getFCP } from 'web-vitals';
 
 // Measure and log the current FCP value,
 // any time it's ready to be reported.
@@ -94,18 +94,18 @@ getFCP(console.log);
 通过 [Paint Timing API](https://w3c.github.io/paint-timing/) 测量该指标
 
 ```js
-let firstHiddenTime = document.visibilityState === "hidden" ? 0 : Infinity;
+let firstHiddenTime = document.visibilityState === 'hidden' ? 0 : Infinity;
 document.addEventListener(
-  "visibilitychange",
+  'visibilitychange',
   (event) => {
     firstHiddenTime = Math.min(firstHiddenTime, event.timeStamp);
   },
-  { once: true }
+  { once: true },
 );
 
 try {
   const onPaintEntry = (entry) => {
-    if (entry.name === "first-contentful-paint") {
+    if (entry.name === 'first-contentful-paint') {
       // Only report if the page wasn't hidden prior to the first paint.
       if (entry.startTime < firstHiddenTime) {
         po.disconnect();
@@ -115,10 +115,10 @@ try {
   };
 
   const po = new PerformanceObserver((entryList, po) =>
-    entryList.getEntries().map((entry) => onPaintEntry(entry, po))
+    entryList.getEntries().map((entry) => onPaintEntry(entry, po)),
   );
   po.observe({
-    type: "paint",
+    type: 'paint',
     buffered: true,
   });
 } catch {
@@ -131,7 +131,7 @@ try {
 > unstable
 
 ```js
-window.performance.getEntriesByName("first-contentful-paint");
+window.performance.getEntriesByName('first-contentful-paint');
 ```
 
 ### 提升 FCP
@@ -231,7 +231,7 @@ const imgLCPSize = Math.min(imgVisibleSize, imgIntrinsicSize);
 通过 Google 提供的 [web-vitals](https://github.com/GoogleChrome/web-vitals) 库测量 FCP。
 
 ```js
-import { getLCP } from "web-vitals";
+import { getLCP } from 'web-vitals';
 
 getLCP(console.log);
 ```
@@ -243,13 +243,13 @@ getLCP(console.log);
 // https://github.com/w3c/page-visibility/issues/29
 // NOTE: ideally this check would be performed in the document <head>
 // to avoid cases where the visibility state changes before this code runs.
-let firstHiddenTime = document.visibilityState === "hidden" ? 0 : Infinity;
+let firstHiddenTime = document.visibilityState === 'hidden' ? 0 : Infinity;
 document.addEventListener(
-  "visibilitychange",
+  'visibilitychange',
   (event) => {
     firstHiddenTime = Math.min(firstHiddenTime, event.timeStamp);
   },
-  { once: true }
+  { once: true },
 );
 
 // Use a try/catch instead of feature detecting `largest-contentful-paint`
@@ -280,17 +280,17 @@ try {
   // Observe entries of type `largest-contentful-paint`, including buffered entries,
   // i.e. entries that occurred before calling `observe()` below.
   po.observe({
-    type: "largest-contentful-paint",
+    type: 'largest-contentful-paint',
     buffered: true,
   });
 
   // Log the final LCP score once the
   // page's lifecycle state changes to hidden.
   addEventListener(
-    "visibilitychange",
+    'visibilitychange',
     function fn(event) {
-      if (document.visibilityState === "hidden") {
-        removeEventListener("visibilitychange", fn, true);
+      if (document.visibilityState === 'hidden') {
+        removeEventListener('visibilitychange', fn, true);
 
         // Force any pending records to be dispatched and disconnect the observer.
         po.takeRecords().forEach((entry) => updateLCP(entry, po));
@@ -302,7 +302,7 @@ try {
         }
       }
     },
-    true
+    true,
   );
 } catch (e) {
   // Do nothing if the browser doesn't support this API.
@@ -431,7 +431,7 @@ FID 测量接收输入事件与下一次主线程空闲之间的增量。这意�
 基于 `web-vitals`：
 
 ```js
-import { getFID } from "web-vitals";
+import { getFID } from 'web-vitals';
 
 // Measure and log FID as soon as it's available.
 getFID(console.log);
@@ -443,20 +443,20 @@ getFID(console.log);
 // 参考 https://github.com/GoogleChrome/web-vitals/blob/master/src/getFID.ts
 const onHidden = (cb, once) => {
   const onVisibilityChange = (event: Event) => {
-    if (document.visibilityState === "hidden") {
+    if (document.visibilityState === 'hidden') {
       cb(event);
       if (once) {
-        removeEventListener("visibilitychange", onVisibilityChange, true);
+        removeEventListener('visibilitychange', onVisibilityChange, true);
       }
     }
   };
-  addEventListener("visibilitychange", onVisibilityChange, true);
+  addEventListener('visibilitychange', onVisibilityChange, true);
 };
 
 let firstHiddenTime = -1;
 
 const initHiddenTime = () => {
-  return document.visibilityState === "hidden" ? 0 : Infinity;
+  return document.visibilityState === 'hidden' ? 0 : Infinity;
 };
 
 const trackChanges = () => {
@@ -469,13 +469,13 @@ const trackChanges = () => {
 // 浏览器回退需要重新统计
 const onBFCacheRestore = (cb) => {
   addEventListener(
-    "pageshow",
+    'pageshow',
     (event) => {
       if (event.persisted) {
         cb(event);
       }
     },
-    true
+    true,
   );
 };
 
@@ -515,7 +515,7 @@ const bindReporter = (callback, metric, reportAllChanges) => {
       if (
         reportAllChanges ||
         finalMetrics.has(metric) ||
-        document.visibilityState === "hidden"
+        document.visibilityState === 'hidden'
       ) {
         metric.delta = metric.value - (prevValue || 0);
 
@@ -531,7 +531,7 @@ const bindReporter = (callback, metric, reportAllChanges) => {
 const initMetric = (name, value) => {
   return {
     name,
-    value: typeof value === "undefined" ? -1 : 0,
+    value: typeof value === 'undefined' ? -1 : 0,
     delta: 0,
     entries: [],
     // id: generateUniqueID()
@@ -540,7 +540,7 @@ const initMetric = (name, value) => {
 
 const getFID = (onReport, reportAllChanges) => {
   const firstHidden = getFirstHidden();
-  let metric = initMetric("FID");
+  let metric = initMetric('FID');
   let report;
 
   const entryHandler = (entry) => {
@@ -554,7 +554,7 @@ const getFID = (onReport, reportAllChanges) => {
   };
 
   const po = new PerformanceObserver((l) => l.getEntries().map(entryHandler));
-  po.observe({ type: "first-input", buffered: true });
+  po.observe({ type: 'first-input', buffered: true });
 
   report = bindReporter(onReport, metric, reportAllChanges);
 
@@ -571,7 +571,7 @@ const getFID = (onReport, reportAllChanges) => {
       window.webVitals.firstInputPolyfill(entryHandler);
     }
     onBFCacheRestore(() => {
-      metric = initMetric("FID");
+      metric = initMetric('FID');
       report = bindReporter(onReport, metric, reportAllChanges);
       window.webVitals.resetFirstInputPolyfill();
       window.webVitals.firstInputPolyfill(entryHandler);
@@ -580,7 +580,7 @@ const getFID = (onReport, reportAllChanges) => {
     // Only monitor bfcache restores if the browser supports FID natively.
     if (po) {
       onBFCacheRestore(() => {
-        metric = initMetric("FID");
+        metric = initMetric('FID');
         report = bindReporter(onReport, metric, reportAllChanges);
         resetFirstInputPolyfill();
         firstInputPolyfill(entryHandler);
@@ -740,7 +740,7 @@ PS：
 基于 `web-vitals` 测量 CLS
 
 ```js
-import { getCLS } from "web-vitals";
+import { getCLS } from 'web-vitals';
 
 getCLS(console.log);
 ```
@@ -755,6 +755,71 @@ TODO 参考 https://web.dev/cls/#measure-cls-in-javascript
 - 除非响应用户交互，否则切勿在现有内容上方插入内容。这样可以确保可以预期发生任何版式移位。
 - 首选将转换动画替换为触发布局更改的属性动画。对过渡进行动画处理，以提供状态与状态之间的上下文和连续性。
 
+## INP
+
+INP(Interaction to Next Paint) 是一种评估响应性能的测试指标。`web-vitals` 已对其支持。
+INP 记录整个页面生命周期中所有交互的延迟。
+这些交互的最高值为该页面的 INP。
+
+`Math.max(INP0, INP1, ..., INPn)`
+
+> 对于少于 50 次交互的页面，INP 是延迟最差的交互。
+> 对于过多交互的页面。INP 通常是 98% ???
+> 对于某些网页，用户会存在更多交互（例如文本编辑器）
+> 此时对最差页面进行抽样会产生误导，通过高百分比，可以评估大多数交互是否得到及时响应。
+
+交互（interaction）是在同一逻辑下，用户触发的一组输入事件。
+
+单个交互的延迟作为交互一部分的任何事件的单个最长持续时间组成。
+交互的持续时间（duration）是从用户于页面交互的点开始测量，直到在所有关联的时间处理程序都执行后呈现下一帧位置。
+
+```
+交互持续时间(duration)= 输入延迟(input delay) + 执行时间(processing time) + 呈现延迟(presentation delay)
+```
+
+![交互的完整过程](https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/Ng0j5yaGYZX9Bm3VQ70c.svg)
+
+### INP 指标
+
+- Good: < 300ms
+- Need Improvement: 200ms - 500ms
+- Poor: > 500ms
+
+> INP 仍处于实验性的指标，阈值可能会时间改变。
+> 需要关注 [CHANGELOG](http://bit.ly/chrome-speed-metrics-changelog)
+
+### INP 与 FID 的差异
+
+FID 是加载阶段的响应指标。
+
+INP 是用户从加载到离开页面可能发生的整个交互范围。
+INP 更类似于 CLS
+
+> 如果用户未进行交互，不会产生 INP 值
+
+### 如何计算 INP
+
+// TODO
+
+### 如何提高 INP
+
+#### 加载阶段
+
+> 根据 HTTP 存档，总阻塞时间 (TBT)与 INP 的相关性是 FID 的两倍。
+
+- 删除未使用的代码。
+- 代码拆分
+- 懒加载的非必要的慢速第三方 JavaScript 。
+- 使用性能分析器查找可以优化的长任务。
+- 确保您在 JavaScript 完成后不会对浏览器渲染提出太多要求——即大型组件树重新渲染、大型图像解码、太多繁重的 css 效果等等。
+
+#### 加载后
+
+- 使用 `postTaskAPI` 适当地确定任务的优先级。
+- 当浏览器空闲时安排非必要的工作 `requestIdleCallback`。
+- 使用性能分析器来评估离散交互（例如，切换移动导航菜单）并找到需要优化的长任务。
+- 审核页面中的第三方 JavaScript 查看其是否影响页面响应能力。
+
 ## Reference
 
 - [Web Vitals](https://web.dev/vitals)
@@ -763,3 +828,4 @@ TODO 参考 https://web.dev/cls/#measure-cls-in-javascript
 - [Time to Interactive (TTI)](https://web.dev/tti/)
 - [First Input Delay (FID)](https://web.dev/fid/)
 - [Total Blocking Time (TBT)](https://web.dev/tbt/)
+- [Interaction to Next Paint (INP)](https://web.dev/inp/#why-not-the-worst-interaction-latency)
