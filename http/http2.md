@@ -671,6 +671,6 @@ HTTP2 向后兼容 HTTP-1 绝大多数功能。
 
 ## 参考
 
-[HTTP-2 Offical Site](https://HTTP-2.github.io/)
-[RFC 7540](https://httpwg.org/specs/rfc7540.html)
-[RFC 7541](https://httpwg.org/specs/rfc7541.html)
+- ~~[RFC7540: HTTP/2](https://httpwg.org/specs/rfc7540.html)~~
+- [RFC7541: HPACK Header Compression for HTTP/2](https://httpwg.org/specs/rfc7541.html)
+- [RFC9113: HTTP/2](https://httpwg.org/specs/rfc9113.html)
