@@ -90,6 +90,8 @@
   - [计数排序](basic-algorithm/ji-shu-pai-xu.md)
   - [基数排序](basic-algorithm/radix-sort.md)
   - [二叉树的遍历](basic-algorithm/er-cha-shu-de-bian-li.md)
+- [压缩算法](/compression-algorithm.md)
+  - [HPACK](/compression-algorithm/hpack.md)
 - [HTTP](http.md)
   - [HTTP 基础](http/http-basic.md)
   - [HTTP 缓存](http/http-cache.md)
