@@ -21,7 +21,9 @@ React 采用了两种模式来解决上诉问题：
 - **Scheduler。**
   在浏览器中注册具有不同优先级的回调。
 
-> [Concurrent React](https://reactjs.org/docs/concurrent-mode-intro.html) 还在 Experimental 阶段. Todo..
+> [~~Concurrent React~~](https://reactjs.org/docs/concurrent-mode-intro.html) ~~还在 Experimental 阶段~~
+>
+> [Concurrent Features](https://react.dev/blog/2022/03/29/react-v18#what-is-concurrent-react) 在 React 18 已经正式发布
 
 ## Scheduler
 
@@ -65,7 +67,7 @@ import {
   unstable_next,
   unstable_LowPriority,
   unstable_scheduleCallback,
-} from 'scheduler';
+} from "scheduler";
 
 // 高消耗的 API，对其降级处理
 function sendDeferredAnalyticsNotification(value) {
@@ -108,7 +110,8 @@ function SearchBox(props) {
 
 ## 参考
 
-[Beyond React 16 -- JSConf 2018](https://www.youtube.com/watch?v=nLF0n9SACd4)
-[scheduling-in-react](https://philippspiess.com/scheduling-in-react/)
-[React Codebase Overview](https://reactjs.org/docs/codebase-overview.html#fiber-reconciler)
-[精读《Scheduling in React》](https://www.jianshu.com/p/3b9545f338c7)
+- [Beyond React 16 -- JSConf 2018](https://www.youtube.com/watch?v=nLF0n9SACd4)
+- [scheduling-in-react](https://philippspiess.com/scheduling-in-react/)
+- [React Codebase Overview](https://reactjs.org/docs/codebase-overview.html#fiber-reconciler)
+- [精读《Scheduling in React》](https://www.jianshu.com/p/3b9545f338c7)
+- [react-v18 change log](https://react.dev/blog/2022/03/29/react-v18#what-is-concurrent-react)
