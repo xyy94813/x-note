@@ -67,6 +67,7 @@
   - [webp 兼容方案](/fe/webp-compatibility.md)
   - [屏幕测量单位](/fe/measure-unit-of-screen.md)
   - [WEB 客户端存储](/fe/web-browser-storage.md)
+  - [WEB 拖拽实现方案](/fe/drag-solution)
   - [WEB SEO](/fe/web-seo.md)
   - WEB 性能优化
     - [WEB 性能指标](/fe/web-performance/performance-metrics.md)
