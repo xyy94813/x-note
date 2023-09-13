@@ -1,6 +1,21 @@
 # Web 拖拽实现方案
 
-## 基于 HTML 自带事件
+## 基于 Drag and Drop API
+
+HTML5 支持
+
+| - 事件名称 - | - 型事件处理程序 - | - 触发时刻 -                                                            |
+| ------------ | ------------------ | ----------------------------------------------------------------------- |
+| drag         | ondrag             | 当拖拽元素或选中的文本时触发。                                          |
+| dragend      | ondragend          | 当拖拽操作结束时触发 (比如松开鼠标按键或敲“Esc”键).                     |
+| dragenter    | ondragenter        | 当拖拽元素或选中的文本到一个可释放目标时触发（见 指定释放目标）。       |
+| dragleave    | ondragleave        | 当拖拽元素或选中的文本离开一个可释放目标时触发。                        |
+| dragover     | ondragover         | 当元素或选中的文本被拖到一个可释放目标上时触发（每 100 毫秒触发一次）。 |
+| dragstart    | ondragstart        | 当用户开始拖拽一个元素或选中的文本时触发（见开始拖拽操作）。            |
+| drop         | ondrop             | 当元素或选中的文本在可释放目标上被释放时触发（见执行释放）。            |
+
+Drag 和 Drop 之间可以通过 `DragEvent.dataTransfer.setData` 和 `DragEvent.dataTransfer.getData` 进行数据传输。
+但是数据仅支持基本类型。
 
 [兼容性参考](https://caniuse.com/dragndrop)
 
@@ -50,6 +65,8 @@
   </body>
 </html>
 ```
+
+[React 基于该 API 的简单示例](https://codesandbox.io/s/drag-list-demo-9nm4zl)
 
 ## 基于 鼠标事件和 getBoundingclientRect 等 API 进行计算
 
