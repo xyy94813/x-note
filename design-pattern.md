@@ -5,6 +5,7 @@
 - 常见设计模式
   - 创建型模式
     - [工厂方法](./design-pattern/factory-method.md)
+    - [抽象工厂](./design-pattern/abstract-factory.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
