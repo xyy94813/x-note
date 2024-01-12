@@ -6,6 +6,7 @@
   - 创建型模式
     - [工厂方法](./design-pattern/factory-method.md)
     - [抽象工厂](./design-pattern/abstract-factory.md)
+    - [构造器](./design-pattern/builder.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
