@@ -12,6 +12,7 @@
     - [单例模式](./design-pattern/singleton.md)
     - [适配器模式](./design-pattern/adapter.md)
     - [桥接模式](./design-pattern/bridge.md)
+    - [组合模式](./design-pattern/composite.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
