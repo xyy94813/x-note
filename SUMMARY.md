@@ -116,6 +116,7 @@
       - [构造器](./design-pattern/builder.md)
       - [原型](./design-pattern/prototype.md)
       - [单例模式](./design-pattern/singleton.md)
+      - [适配器模式](./design-pattern/adapter.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
   - [MVVM](design-pattern/mvvm.md)
