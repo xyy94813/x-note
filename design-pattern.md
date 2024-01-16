@@ -15,6 +15,7 @@
     - [组合模式](./design-pattern/composite.md)
     - [外观模式](./design-pattern/facade.md)
     - [享元模式](./design-pattern/flyweight.md)
+    - [代理模式](./design-pattern/proxy.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
