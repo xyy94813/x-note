@@ -14,6 +14,7 @@
     - [桥接模式](./design-pattern/bridge.md)
     - [组合模式](./design-pattern/composite.md)
     - [外观模式](./design-pattern/facade.md)
+    - [享元模式](./design-pattern/flyweight.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
