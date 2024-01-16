@@ -123,6 +123,7 @@
       - [享元模式](./design-pattern/flyweight.md)
       - [代理模式](./design-pattern/proxy.md)
       - [责任链模式](./design-pattern/chain-of-responsibility.md)
+      - [命令模式](./design-pattern/command.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
   - [MVVM](design-pattern/mvvm.md)
