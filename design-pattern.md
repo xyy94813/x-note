@@ -18,6 +18,7 @@
     - [代理模式](./design-pattern/proxy.md)
     - [责任链模式](./design-pattern/chain-of-responsibility.md)
     - [命令模式](./design-pattern/command.md)
+    - [迭代器模式](./design-pattern/iterator.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
