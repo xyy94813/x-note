@@ -125,6 +125,7 @@
       - [责任链模式](./design-pattern/chain-of-responsibility.md)
       - [命令模式](./design-pattern/command.md)
       - [迭代器模式](./design-pattern/iterator.md)
+      - [中介者模式](./design-pattern/mediator.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
   - [MVVM](design-pattern/mvvm.md)
