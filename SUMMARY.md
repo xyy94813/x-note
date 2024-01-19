@@ -126,6 +126,7 @@
       - [命令模式](./design-pattern/command.md)
       - [迭代器模式](./design-pattern/iterator.md)
       - [中介者模式](./design-pattern/mediator.md)
+      - [备忘录模式](./design-pattern/memento.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
   - [MVVM](design-pattern/mvvm.md)
