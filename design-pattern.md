@@ -21,6 +21,7 @@
     - [迭代器模式](./design-pattern/iterator.md)
     - [中介者模式](./design-pattern/mediator.md)
     - [备忘录模式](./design-pattern/memento.md)
+    - [状态模式](./design-pattern/state.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
