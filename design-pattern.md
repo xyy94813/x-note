@@ -22,6 +22,7 @@
     - [中介者模式](./design-pattern/mediator.md)
     - [备忘录模式](./design-pattern/memento.md)
     - [状态模式](./design-pattern/state.md)
+    - [策略模式](./design-pattern/strategy.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
