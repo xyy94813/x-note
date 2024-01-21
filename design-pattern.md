@@ -23,6 +23,7 @@
     - [备忘录模式](./design-pattern/memento.md)
     - [状态模式](./design-pattern/state.md)
     - [策略模式](./design-pattern/strategy.md)
+    - [模版方法模式](./design-pattern/template-method.md)
 - [MVC](/design-pattern/mvc.md)
 - [MVP](/design-pattern/mvp.md)
 - [MVVM](/design-pattern/mvvm.md)
