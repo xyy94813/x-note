@@ -127,6 +127,7 @@
       - [迭代器模式](./design-pattern/iterator.md)
       - [中介者模式](./design-pattern/mediator.md)
       - [备忘录模式](./design-pattern/memento.md)
+      - [观察者模式](./design-pattern/observer.md)
       - [状态模式](./design-pattern/state.md)
       - [策略模式](./design-pattern/strategy.md)
       - [模版方法模式](./design-pattern/template-method.md)
