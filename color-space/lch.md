@@ -22,7 +22,7 @@ LCH 由亮度（Lightness）、色度（Chroma）和色调（Hue）三个方向�
 - Lightness 取值范围通常为 0 到 100
 - Chroma 的范围从 0 到大约 131
 
-![LCH 坐标系](./images/color-space-LCH-coordinate-system.jpeg)
+![LCH 坐标系](../images/color-space-LCH-coordinate-system.jpeg)
 
 ## 对比其它色彩空间
 
@@ -31,12 +31,12 @@ LCH 由亮度（Lightness）、色度（Chroma）和色调（Hue）三个方向�
 - LCH 感知均匀性、设备无关性、色彩范围更广
 - HSL 颜色空间更符合人类对颜色的感知，包括色相、饱和度和亮度这三个直观的属性。也因此更易于调整
 
-![LCH 和 HSL 亮度上的差异](./images/the-same-colour-in-HSL-and-LCH-but-brightness-changing.webp)
+![LCH 和 HSL 亮度上的差异](../images/the-same-colour-in-HSL-and-LCH-but-brightness-changing.webp)
 the-difference-between-LCH-Chroma-and-HSL-Saturation
 
-![LCH 和 HUE 在 HUE 上的差异](./images/the-differences-in-hue-between-LCH-and-HUE.webp)
+![LCH 和 HUE 在 HUE 上的差异](../images/the-differences-in-hue-between-LCH-and-HUE.webp)
 
-![LCH 色度与 HSL 饱和度的不同](./images/LCH-Chromaticity-vs-HSL-Saturation.webp)
+![LCH 色度与 HSL 饱和度的不同](../images/LCH-Chromaticity-vs-HSL-Saturation.webp)
 
 与 sRGB 对比：
 
