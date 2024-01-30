@@ -111,7 +111,7 @@
   - [二叉树的遍历](basic-algorithm/er-cha-shu-de-bian-li.md)
 - 压缩算法
   - [HPACK](compression-algorithm/hpack.md)
-  - [HPACK](compression-algorithm/qpack.md)
+  - [QPACK](compression-algorithm/qpack.md)
 - 设计模式
   - DDD
     - [模型元素的模式](./design-pattern/domain-driven-design/patterns-of-model-elements.md)
