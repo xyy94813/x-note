@@ -76,9 +76,6 @@
     - [webp 兼容方案](/fe/webp-compatibility.md)
     - [WEB 拖拽实现方案](/fe/drag-solution.md)
   - [WEB SEO](/fe/web-seo.md)
-- 正则表达式
-  - [正则表达式基础](regexp/regexp-base.md)
-  - [正则表达式的悲观回溯](regexp/regexp-pessimistic-backtracking.md)
 - Git
   - [Git 工作流](git/git-gong-zuo-liu.md)
   - [Git 内部原理](/git/git-internals.md)
@@ -95,6 +92,9 @@
   - [gRPC 简介](grpc/grpc-overview.md)
   - [gRPC 基础概念](grpc/grpc-concepts.md)
   - [GRPC with GraphQL and TypeScript](/grpc/grpc-with-graphql-and-TypeScript.md)
+- 正则表达式
+  - [正则表达式基础](regexp/regexp-base.md)
+  - [正则表达式的悲观回溯](regexp/regexp-pessimistic-backtracking.md)
 - 基础算法
   - [冒泡排序](basic-algorithm/mao-pao-pai-xu.md)
   - [插入排序](basic-algorithm/cha-ru-pai-xu.md)
