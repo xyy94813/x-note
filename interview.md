@@ -1,0 +1,286 @@
+# 面试
+
+## 面试核心
+
+表达自己和证明自身能力
+
+## 面试内容
+
+> 不要说太细节的公司经营情况!!!!（涉及职业道德以及数据泄露问题）
+
+- 自我介绍
+  - 工作经历
+  - 职责内容
+  - 项目内容
+  - 产出，亮点，核心竞争力，及如何证明
+    - 基于 shared worker 做跨 Tab 数据共享
+    - mini-img-viewer
+      - canvas draw image
+      - rotate 坐标系
+    - amap-react-components
+    - geo-editor
+    - react monaco editor
+    - CI/CD 建设
+    - 部门协调，信息拉通润滑剂作用
+      - 打通，部门之间的沟通协商
+    - 较强的学习能力
+      - react-relay demo 类比同事
+- 技术细节
+  - 性能优化
+    - 是否需要优化
+    - 运行优化
+      - 减少 re-painting 和 re-flow
+        - 盒模型相关属性先写
+        - 仅可能一次性声明盒模型相关属性
+        - 提前固定 “替换元素” 的高度
+        - 创建 块格式化上下文 （BFC）
+          - position 为 absolute 或 fixed
+          - 使用 css transform 取缔 margin/padding
+      - script 放文档底部的原因
+      - script defer dom 渲染完后执行
+      - script async 加载完后立即执行，执行脚本时会阻塞 HTML Parser。
+      - PWA ----> SSR 或 静态预渲染
+      - js object 声明方式 { x: 1 } 优先于 {} and {}.x = 1;
+      - worker 多线程， + post-message
+      - 优化实现算法
+        - 快排等......
+      - cache
+        - react memo
+        - 优化 shouldUpdate 之类的实现
+    - 网络优化
+      - 请求数量 （WEB 默认约束了单源的最大 TCP 连接数，所以需要减少请求数量）
+        - bundle 减少请求数量
+        - icon 精灵图 => background-position
+        - graphql
+        - 按需/懒加载
+          - lazy load 图片
+          - lazy load 大尺寸 module
+      - 请求内容大小
+        - 图片格式 webp/avif
+        - svg icon，向量图片格式
+        - 压缩传输内容
+          - 开启 gzip/snappy 等压缩算法
+      - 缓存
+        - useSWR => key
+        - CDN，内容分发网络
+          - 多节点，最近节点
+        - http cache
+          - 强缓存
+            - Expires + 绝对时间
+            - cache-control + `max-age=<seconds>`。相对时间。
+            - cache-control： no-cache => 缓存需要 “新鲜度检测”
+            - http 1.1 以上，配置了 max-age 会忽略 `Expires`
+          - 服务器再验证：协商缓存
+            - `If-None-Match` + `e-tag`, hash 值
+            - `If-Modified-Since` 和 `Last-Modified`
+          - 试探性过期, browser 默认缓存
+            - 私有缓存（private cache）
+      - 预加载
+        - preconnect 预先进行 TCP 链接
+        - preload 预先加载资源
+        - prefetch 预先加载下一页资源
+        - PWA
+          - Service Worker + manifest
+      - 升级协议
+        - http2
+          - 基于 TCP 多路服用，增加 stream 和 Frame 的概念。
+          - head 压缩, HPACK
+        - http3
+          - 基于 UDP / TLS 1.3 的 QUIC 协议。解决 TCP 丢包阻塞问题
+          - QPACK 支持 UPD 和更高性能的 head 压缩算法
+  - 网络安全
+    - 点击劫持 （本质是 视觉欺骗）
+      - 使用一个透明不可见的 iframe 覆盖在一个网页上，然后诱使用户在不知情的情况下点击透明的 iframe 页面
+      - 防御手段
+        - frame busting， self === top
+        - `x-frame-options`
+          - deny
+          - sameorigin
+          - allow-from https://example.com/
+        - Content-Security-Policy 的 frame-ancestors 指令
+    - xss
+      - 类似于 SQL 注入，URL ，聊天论坛输入/输出
+      - 反射型 XSS，DOM 型
+      - react dangerous-insert-html
+      - 需要对动态内容进行 `HTMLEncode` / `JavaScriptEncode`
+      - xss 之后成功后往往进行 CSRF
+    - csrf
+      - 伪造用户请求，利用 iframe/img/script 等元素跨站请求时允许
+      - 防御手段
+        - 重要操作，短信/邮件/私钥令牌等 F2A 操作
+        - 检查 http header `Referer`. 判断请求来自于合法站点
+        - cookie Secure 仅 HTTPS
+        - cookie http-only 防止通过 JavaScript 访问 cookie 值。
+        - cookie same-site 确定何时将网站的 cookie 包含在源自其他网站的请求
+        - 采用 JWT
+    - 代理劫持
+      - http 1/2 明文传输，中间代理服务器能够篡改
+      - 对 HTTP 加密，走 HTTPS
+      - 用户信任黑客节点的返回证书
+    - 同源策略 CORS
+      - 同源策略可防止某个网页上的恶意脚本通过该页面的文档对象模型访问另一网页上的敏感数据。
+        - XSS A 站点
+        - 注入攻击者服务器恶意者脚本
+        - 修改 A 站点页面内容，攻击 B 站点内容（A 站点受 B 站点信任）
+      - 跨域方案
+        - HTTP CORS header
+          - `Access-Control-Allow-Headers`
+          - `Access-Control-Allow-Methods`
+          - `Access-Control-Allow-Origin`
+        - 反向代理
+        - JSONP，Response 的 content-type 要与请求头一致
+          - script + callbackFn()
+        - `iframe`
+          - 缺陷 1：和主页面共享连接池
+          - 缺陷 2：domain 过期被恶意抢注，点击劫持成功率 upp
+    - HTTPS
+      - 非对称加密，证书作为公钥，
+      - 证书的校验
+        - ssl 证书＋中间证书＋根证书
+        - 自签证书。
+  - html5 API
+    - resize-observer
+    - intersection-observer
+    - Drag and Drop
+    - Canvas
+    - WebGL
+  - 兼容性问题
+    - babel-preset-env
+    - post-css/autoprefixer
+    - webp 兼容
+      - picture 多来源
+      - polyfill
+      - img 存储 transform
+  - 应用错误收集上报
+    - 基于开源社区 Sentry 方案
+      - 收集频率，采样率 100%
+      - 告警策略。
+        同类型错误至少 30min 重新通知。
+        同类型错误最多 5min 内重复通知。
+        基于 URL 通知组员。
+      - resolve 策略。7 天 auto resolve。
+        保证线上环境不再复现，自动关闭。
+        偶现 bug 出于成本可以考虑处理
+      - 基于 CI 上传 source map
+    - 收集方式
+      - error 事件
+      - unhandledrejection
+  - SEO
+    - 得基于搜索引擎
+    - ssr
+    - title
+    - description
+    - keywords 现在的影响微乎其微
+  - 设计模式
+    - mvc
+      - m，模型表示解释业务逻辑即业务模型和数据模型
+      - v，视图表示用户界面组件
+      - Controller 的职责是处理传入的请求
+    - mvp
+      - Presenter 负责代表视图处理所有的用户界面事件。
+    - mvvm
+      - ViewModel 视图模型负责显示方法、命令和其他功能，这些方法、命令和功能协助维护视图的状态
+      - react-relay
+  - 编程思想（JS，TS 多编程范式）
+    - 指令式编程
+      - 一种以计算机指令为基础的编程范式
+      - 直观、易于理解和调试
+    - 面向对象编程
+      - 面向对象可以看作是 DDD 中的子思维
+      - 是种具有对象概念的编程典范，同时也是一种程序开发的抽象方针
+      - 它将“对象”作为程序的基本单元，将程序和数据封装其中
+      - 共享状态，导致状态的管理和同步变得复杂
+    - 函数式编程
+      - 将电脑运算视为函数的计算
+      - 没有副作用，对于并发和并行处理更加友好
+    - react （TODO）
+      - 生命周期
+        - 挂载
+          - getDefaultProps
+          - getDefaultState
+          - constructor()
+          - getDerivedStateFromProps
+          - render
+          - componentDidMount
+          - sync render dom tree
+          - sync execute layout effect
+          - async execute effect
+        - 更新
+          - getDerivedStateFromProps
+          - shouldComponentUpdate
+          - render
+          - getSnapshotBeforeUpdate
+          - componentDidUpdate
+          - sync render dom tree
+          - sync execute layout effect
+          - async execute effect
+        - 卸载
+          - componentWillUnmount
+      - setState
+        - onXXX 异步
+        - setInterval 同步
+      - diff 算法
+        - 广度优先
+        - key
+        - component type
+        - shouldComponentUpdate, 默认 Object.is ，shadow 比较
+      - Fiber
+        - 解决 sync render dom 卡顿问题
+        - 将 render dom 拆分成多个子任务 work
+        - 双层虚拟 dom，alternate fiber tree （更新后的 fiber tree）
+    - VUE
+      - 生命周期
+        - 挂载
+          - beforeCreate
+          - created
+          - beforeMount
+          - mounted
+        - 更新
+          - beforeUpdate
+          - updated
+        - 卸载
+          - beforeUnmount
+          - unmounted 此时组件及其相关的数据和方法都已被清除。
+- 常见问题
+  - 想问什么
+    - 公司规模
+    - 团队情况
+    - 技术氛围
+    - 技术方向
+    - 工作时间
+    - 建议和反馈
+  - 学习方法
+    - 技术 Conf
+    - 官方文档
+    - github trending
+  - 职业规划
+    - 管理方向
+    - 技术作为兴趣
+  - 遇到了什么困难
+    - 定位问题
+      - 是否真的是一个问题
+      - 是否需要解决
+    - 挖掘问题产生的真实原因
+    - 如何解决问题
+      - 查找官方文档
+      - github issues 或 stack overflow 技术论坛
+      - 社区博客
+      - 咨询周围人
+  - 如何保证应用的稳定性
+    - 设计上尽可能遵从开闭原则
+      - 组合/策略/适配器/装饰器/代理等设计模式
+    - linter 辅助
+    - 规范开发流程
+      - 代码必须遵循人类可读性
+      - 核心 lib 升级或使用，应做技术刺探（lib 升级）
+      - 审计 lib 引用
+    - 完善测试流程
+      - 测试驱动开发
+      - code review 白盒测试
+      - 增加单元测试
+        - 直接基于 jest 做逻辑测试
+        - 基于 snapshot 做 ui 单元测试
+        - 基于 @testing-library 模拟用户行为做测试
+      - 增加集成测试
+        - puppeteer/Selenium
+    - 应用错误收集上报
