@@ -201,7 +201,7 @@ QPACK 定义了单向流，用于从编码器向解码器发送指令，以及�
 +---+---+---+-------------------+
 ```
 
-#### 插入名称参考
+#### 插入名称索引
 
 插入字段行——索引名称:
 
@@ -218,7 +218,7 @@ QPACK 定义了单向流，用于从编码器向解码器发送指令，以及�
 
 #### 插入文字名称
 
-插入字段线——新名称:
+插入字段行——新名称:
 
 ```
      0   1   2   3   4   5   6   7
@@ -304,6 +304,177 @@ QPACK 定义了单向流，用于从编码器向解码器发送指令，以及�
 | 0 | 0 |     Increment (6+)    |
 +---+---+-----------------------+
 ```
+
+### 字段行格式
+
+编码字段部分由前缀和本部分中定义的可能为空的表示序列组成。
+每个表示对应于一条字段行。
+这些表示引用特定状态下的静态表或动态表，但它们不会修改该状态。
+
+编码字段部分在由封闭协议定义的流上的帧中携带。
+
+#### 编码字段部分前缀（Encoded Field Section Prefix）
+
+每个编码字段部分都以两个整数为前缀。
+
+```
+  0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+|   Required Insert Count (8+)  |
++---+---------------------------+
+| S |      Delta Base (7+)      |
++---+---------------------------+
+|      Encoded Field Lines    ...
++-------------------------------+
+```
+
+所需插入计数标识处理编码字段部分所需的动态表的状态。
+阻塞解码器使用所需插入计数来确定何时可以安全地处理其余字段部分。
+
+```shell
+EncInsertCount = ReqInsertCount == 0 ? 0 : (ReqInsertCount mod (2 * MaxEntries)) + 1
+
+# MaxEntries 为动态表可以拥有的最大条目数，最小的条目具有空名称和值字符串，大小为 32
+MaxEntries = floor( MaxTableCapacity / 32 )
+```
+
+解码器可以使用如下算法重建所需插入计数。
+
+```shell
+FullRange = 2 * MaxEntries
+   if EncodedInsertCount == 0:
+      ReqInsertCount = 0
+   else:
+      if EncodedInsertCount > FullRange:
+         Error # QPACK_DECOMPRESSION_FAILED
+
+      # TotalNumberOfInserts is the total number of inserts into the decoder's dynamic table.
+      MaxValue = TotalNumberOfInserts + MaxEntries
+
+      # MaxWrapped is the largest possible value of
+      # ReqInsertCount that is 0 mod 2 * MaxEntries
+      MaxWrapped = floor(MaxValue / FullRange) * FullRange
+      ReqInsertCount = MaxWrapped + EncodedInsertCount - 1
+
+      # If ReqInsertCount exceeds MaxValue, the Encoder's value
+      # must have wrapped one fewer time
+      if ReqInsertCount > MaxValue:
+         if ReqInsertCount <= FullRange:
+            Error # QPACK_DECOMPRESSION_FAILED
+         ReqInsertCount -= FullRange
+
+      # Value of 0 must be encoded as 0.
+      if ReqInsertCount == 0:
+         Error # QPACK_DECOMPRESSION_FAILED
+```
+
+例如，动态表 200 bytes, 解码器已接收到 10 个插入。
+编码值 4 代表字段部分的所需插入计数为 15
+
+```shell
+MaxEntries = floor( MaxTableCapacity / 32 ) = (200 / 32) = 6
+FullRange = 2 * MaxEntries = 6 * 2 = 12
+MaxValue = TotalNumberOfInserts + MaxEntries = 10 + 6 = 16
+MaxWrapped = floor(MaxValue / FullRange) * FullRange = floor(16/12) * 12 = 12
+ReqInsertCount = MaxWrapped + EncodedInsertCount - 1 = 12 + 4 - 1 = 15
+
+# ReqInsertCount < MaxValue => ReqInsertCount = 15
+```
+
+Base 用于解析动态表中的引用，使用一位符号（上述结构中的 “S” 部分）和 Delta Base 值相对于所需插入计数对 Base 进行编码。
+
+符号位为 0 表示 Base 大于或等于 Required Insert Count 的值；
+解码器将 Delta Base 的值添加到所需插入计数以确定 Base 的值。
+
+```
+if Sign == 0:
+  Base = ReqInsertCount + DeltaBase
+else:
+  Base = ReqInsertCount - DeltaBase - 1
+```
+
+Base 的值不能为负。如果所需插入计数的值小于或等于 Delta Base 的值，端点必须将符号位为 1 的字段块视为无效。
+
+#### 索引字段行（Indexed Field Line）
+
+索引字段行表示标识静态表中的条目或动态表中绝对索引小于 Base 值的条目。
+
+```
+  0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+| 1 | T |      Index (6+)       |
++---+---+-----------------------+
+```
+
+#### 带名称索引的文字字段行（Literal Field Line with Name Reference）
+
+具有名称引用表示的文字字段行对字段行进行编码，其中字段名称与静态表中条目的字段名称或动态表中绝对索引小于 Base 值的条目的字段名称匹配。
+
+```
+  0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+| 0 | 1 | N | T |Name Index (4+)|
++---+---+---+---+---------------+
+| H |     Value Length (7+)     |
++---+---------------------------+
+|  Value String (Length bytes)  |
++-------------------------------+
+```
+
+"N”指示是否允许中间设备将此字段行添加到后续跃点上的动态表中。
+
+“T”位指示引用是静态表还是动态表。
+当 T=1 时，数字代表静态表索引；当 T=0 时，该数字是动态表中条目的相对索引
+
+#### 带有文字名称的文字字段行（Literal Field Line with Literal Name）
+
+具有文字名称表示的文字字段行将字段名称和字段值编码为字符串文字。
+
+```
+  0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+| 0 | 0 | 1 | N | H |NameLen(3+)|
++---+---+---+---+---+-----------+
+|  Name String (Length bytes)   |
++---+---------------------------+
+| H |     Value Length (7+)     |
++---+---------------------------+
+|  Value String (Length bytes)  |
++-------------------------------+
+```
+
+#### 带后基索引的索引字段行（Indexed Field Line with Post-Base Index）
+
+具有后基索引表示的索引字段行标识动态表中绝对索引大于或等于基值的条目。
+
+```
+  0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+| 0 | 0 | 0 | 1 |  Index (4+)   |
++---+---+---+---+---------------+
+```
+
+#### 带有后基名称索引的文字字段行（Literal Field Line with Post-Base Name Reference）
+
+具有后基名称引用表示形式的文字字段行对字段行进行编码，其中字段名称与绝对索引大于或等于基值的动态表条目的字段名称相匹配。
+
+```
+  0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+| 0 | 0 | 0 | 0 | N |NameIdx(3+)|
++---+---+---+---+---+-----------+
+| H |     Value Length (7+)     |
++---+---------------------------+
+|  Value String (Length bytes)  |
++-------------------------------+
+```
+
+"N”指示是否允许中间设备将此字段行添加到后续跃点（subsequent hops）上的动态表中。
+
+## 潜在安全问题
+
+- 使用压缩作为基于长度的预言来验证对压缩到共享压缩上下文中的秘密的猜测
+- 由于解码器处的处理或内存容量耗尽而导致拒绝服务
 
 ## 参考
 

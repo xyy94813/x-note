@@ -110,7 +110,8 @@
   - [基数排序](basic-algorithm/radix-sort.md)
   - [二叉树的遍历](basic-algorithm/er-cha-shu-de-bian-li.md)
 - 压缩算法
-  - [HPACK](/compression-algorithm/hpack.md)
+  - [HPACK](compression-algorithm/hpack.md)
+  - [HPACK](compression-algorithm/qpack.md)
 - 设计模式
   - DDD
     - [模型元素的模式](./design-pattern/domain-driven-design/patterns-of-model-elements.md)
