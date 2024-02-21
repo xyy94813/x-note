@@ -65,6 +65,7 @@
     - [重绘与重排](web/re-paint-and-re-flow.md)
     - [前端模块化系统](web/module-system.md)
     - [WEB 客户端存储](web/web-browser-storage.md)
+    - [浏览器的渲染过程](web/web-browser-render.md)
   - WEB 性能优化
     - [WEB 性能指标](web/performance/performance-metrics.md)
     - [WEB 图片优化](web/performance/optimize-image.md)
