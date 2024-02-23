@@ -1,7 +1,5 @@
 # React 虚拟 DOM
 
-## 描述
-
 **虚拟 DOM (Virtual DOM， VDOM) 是一种程序设计概念。**
 
 > “如何实现虚拟 DOM” 这个问题可以转换成 “如何实现虚拟 DOM 技术”。
@@ -22,12 +20,14 @@ React 中基于 Fiber 的增量变更称之为 Scheduling ？？？？？
 
 ## 优势
 
-抽象出属性操纵，事件处理和手动 DOM 更新。只需要告诉 `React` UI 所处的状态，React 就能确保 DOM 匹配该状态。
+- 抽象出属性操纵，事件处理和批量进行 DOM 更新。
+- 支持跨平台。
 
 ## 对比 Shadow DOM
 
 虚拟 DOM 与**Shadow DOM**是完全不同的。
-**Shadow DOM** 是一种浏览器技术，主要用于确定 Web 组件中的变量和 CSS。虚拟 DOM 是由浏览器 API 之上的 JavaScript 库实现的概念。
+**Shadow DOM** 是一种浏览器技术，主要用于确定 Web 组件中的变量和 CSS。
+虚拟 DOM 是由浏览器 API 之上的 JavaScript 库实现的概念。
 
 ## 参考
 
