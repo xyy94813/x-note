@@ -110,6 +110,7 @@
   - [计数排序](basic-algorithm/ji-shu-pai-xu.md)
   - [基数排序](basic-algorithm/radix-sort.md)
   - [二叉树的遍历](basic-algorithm/er-cha-shu-de-bian-li.md)
+  - [动态规划](basic-algorithm/dynamic-programming.md)
 - 压缩算法
   - [HPACK](compression-algorithm/hpack.md)
   - [QPACK](compression-algorithm/qpack.md)
