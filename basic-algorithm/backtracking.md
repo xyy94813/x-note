@@ -51,6 +51,44 @@ const backtracking = (eleList, curPath = [], result = []) => {
 
 ## 使用场景
 
+### 排列组合
+
+[Leetcode 77: Combinations](https://leetcode.com/problems/combinations/description/)
+
+给定两个整数 n 和 k，返回范围 [1, n] 中所有可能的 k 个数的组合。
+你可以按 任何顺序 返回答案。
+
+```js
+/**
+ * @param {number} n
+ * @param {number} k
+ * @return {number[][]}
+ */
+var combine = function (n, k) {
+  const result = [];
+
+  const dfs = (curPath = []) => {
+    const curPathLen = curPath.length;
+    if (curPathLen === k) {
+      result.push(curPath.slice());
+    } else {
+      const peek = curPath[curPathLen - 1] || 0;
+      for (let ele = peek + 1; ele <= n; ++ele) {
+        curPath.push(ele);
+        dfs(curPath);
+        curPath.pop();
+      }
+    }
+
+    return result;
+  };
+
+  dfs();
+
+  return result;
+};
+```
+
 ### 分割回文串
 
 [Leetcode 131](https://leetcode.com/problems/palindrome-partitioning/description/)
@@ -82,33 +120,29 @@ var partition = function (s) {
     return palindromeStrCache.get(key);
   };
 
-  const core = (str, startIndex, curTmp, result) => {
-    const strLen = str.length;
+  const dfs = (startIndex, curPath, result) => {
+    const strLen = s.length;
     if (startIndex < strLen) {
       for (let endIndex = startIndex; endIndex < strLen; ++endIndex) {
-        if (isPalindromeStr(str, startIndex, endIndex)) {
-          curTmp.push(str.slice(startIndex, endIndex + 1));
+        if (isPalindromeStr(s, startIndex, endIndex)) {
+          curPath.push(s.slice(startIndex, endIndex + 1));
           // 执行具体的逻辑
-          core(s, endIndex + 1, curTmp.slice(), result);
+          dfs(endIndex + 1, curPath, result);
           // 回溯
-          curTmp.pop();
+          curPath.pop();
         }
       }
     } else {
       // 达到终点，加入最终结果
-      result.push(curTmp);
+      result.push(curPath.slice());
     }
 
     return result;
   };
 
-  return core(s, 0, [], []);
+  return dfs(0, [], []);
 };
 ```
-
-### 排列组合
-
-TODO
 
 ## 参考
 
