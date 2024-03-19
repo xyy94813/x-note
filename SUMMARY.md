@@ -145,6 +145,7 @@
     - [策略模式](./design-pattern/strategy.md)
     - [模版方法模式](./design-pattern/template-method.md)
     - [访问者模式](./design-pattern/visitor.md)
+    - [依赖注入](./design-pattern/dependency-injection.md)
   - [MVC](design-pattern/mvc.md)
   - [MVP](design-pattern/mvp.md)
   - [MVVM](design-pattern/mvvm.md)
