@@ -99,7 +99,7 @@ class APP {}
 
 // 柯里化，装饰
 @curry
-const injectController = (path, controllerClz) => {
+const registryController = (path, controllerClz) => {
   const app = APP.getInstance();
   app.checkPath(path);
 
@@ -112,10 +112,12 @@ const injectController = (path, controllerClz) => {
 };
 
 @singleton
-@injectController('path1')
+@registryController('path1')
 class ControllerA {}
 
 @singleton
-@injectController('path2')
-class ControllerB {}
+@registryController('path2')
+class ControllerB {
+  constructor(@Inject(mockService) private service: MyService) {}
+}
 ```
