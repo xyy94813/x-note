@@ -54,6 +54,10 @@
   - [React Refs](react/react-refs.md)
   - [React HMR](react/react-hmr.md)
   - [React Hook](react/react-hook.md)
+- VUE
+  - [VUE 响应式系统](vue/vue-rendering-mechanism.md)
+  - [VUE 渲染机制](vue/vue-rendering-mechanism.md)
+  - [关于 Vue 的思考](vue/thinking-of-vue.md)
 - Webpack
   - [Webpack 基本概念](webpack/webpack-concepts.md)
   - [Webpack HMR](webpack/webpack-hmr.md)
